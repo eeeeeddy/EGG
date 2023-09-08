@@ -17,9 +17,11 @@ public class Article {
     // 논문 Id
     private String article_id;
 
+    @Lob
     // 한글 제목
     private String title_ko;
 
+    @Lob
     // 영문 제목
     private String title_en;
 

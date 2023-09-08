@@ -17,8 +17,13 @@ public class Author {
     // 저자 아이디
     private String author_id;
 
-    // 논문 제목
-    private String article_title;
+    @Lob
+    // 논문 한글 제목
+    private String article_title_ko;
+
+    @Lob
+    // 논문 영문 제목
+    private String article_title_en;
 
     // 저자 이름
     private String name;
