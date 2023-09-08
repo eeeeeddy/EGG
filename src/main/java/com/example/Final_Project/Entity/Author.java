@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 public class Author {
-
+    // 깃 디벨롭 테스트
     @Id
     @Column(nullable = false, unique = true)
     // 저자 아이디
