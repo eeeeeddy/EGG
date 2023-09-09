@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-
+//  엔티티와 관련된 기본적인 CRUD 작업을 자동으로 수행
 // JpaRepository를 상속받아 Article 엔티티와 상호작용할 Repository를 정의
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
