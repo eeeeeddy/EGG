@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Article_Author_Map {
+public class ArticleAuthorMap {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
