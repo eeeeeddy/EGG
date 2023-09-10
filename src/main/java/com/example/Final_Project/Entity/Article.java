@@ -37,6 +37,9 @@ public class Article {
     // 학술지(저널) 이름
     private String journal_name;
 
+    // 논문 발행 기관
+    private String publisher;
+
     // 발행 연도
     private Integer pub_year;
 
@@ -60,4 +63,8 @@ public class Article {
 
     // 피인용 횟수
     private Integer citation_count;
+
+    // ArticleReference 연결 관련
+    @OneToOne(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ArticleReference articleReference;
 }

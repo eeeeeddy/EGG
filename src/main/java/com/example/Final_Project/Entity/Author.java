@@ -17,17 +17,13 @@ public class Author {
     // 저자 아이디
     private String author_id;
 
-    @Lob
-    // 논문 한글 제목
-    private String article_title_ko;
-
-    @Lob
-    // 논문 영문 제목
-    private String article_title_en;
-
     // 저자 이름
     private String name;
 
     // 저자 소속
     private String institution;
+
+    // AuthorArticleList 연결 관련
+    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private AuthorArticleList authorArticleList;
 }
