@@ -23,7 +23,7 @@ public class Author {
     // 저자 소속
     private String institution;
 
-    // AuthorArticleList 연결 관련
+    // 작성 논문 테이블 (AuthorArticleList 연결 관련)
     @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AuthorArticleList authorArticleList;
 }
