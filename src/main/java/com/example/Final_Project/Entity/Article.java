@@ -57,14 +57,10 @@ public class Article {
     @Lob
     private String abstract_en;
 
-    @Lob
-    // 참고문헌 그룹
-    private String reference;
-
     // 피인용 횟수
     private Integer citation_count;
 
-    // ArticleReference 연결 관련
+    // 참고문헌 테이블 (ArticleReference 연결 관련)
     @OneToOne(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ArticleReference articleReference;
 }

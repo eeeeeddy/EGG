@@ -16,7 +16,7 @@ public class ArticleReference {
 
     @OneToOne
     @JoinColumn(name = "article_id", referencedColumnName = "article_id")
-    // 논문 아이디
+    // Origin 논문 아이디
     private Article article;
 
     @Lob
