@@ -63,8 +63,4 @@ public class Article {
 
     // 피인용 횟수
     private Integer citation_count;
-
-    // 참고문헌 테이블 (ArticleReference 연결 관련)
-    @OneToOne(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ArticleReference articleReference;
 }
