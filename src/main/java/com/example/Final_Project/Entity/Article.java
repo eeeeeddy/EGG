@@ -51,6 +51,7 @@ public class Article {
     private String major;
 
     // 키워드 리스트
+    @Column(name = "keyword")
     private String keyword;
 
     // 한글 초록

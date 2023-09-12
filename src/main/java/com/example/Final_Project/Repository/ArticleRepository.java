@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 //  엔티티와 관련된 기본적인 CRUD 작업을 자동으로 수행
 // JpaRepository를 상속받아 Article 엔티티와 상호작용할 Repository를 정의
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface ArticleRepository extends JpaRepository<Article, String> {
 
     // 여러 검색 조건을 지원하기위해 @Query 어노테이션을 사용하여 사용자 정의 쿼리 작성
     @Query("SELECT a FROM Article a WHERE " +

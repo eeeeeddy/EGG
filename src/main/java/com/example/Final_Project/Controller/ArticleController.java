@@ -23,4 +23,10 @@ public class ArticleController {
         // "findByKeyword" 메서드를 사용하여 검색 키워드와 일치하는 데이터를 데이터베이스에서 조회하고 반환
         return articleRepository.findByKeyword(searchKeyword);
     }
+    // article_id를 기준으로 논문을 조회하는 엔드포인트 추가
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/{articleId}")
+    public Article getArticleById(@PathVariable String articleId) {
+        return articleRepository.findById(articleId).orElse(null);
+    }
 }
