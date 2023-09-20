@@ -8,11 +8,11 @@ import lombok.Getter;
 @Getter
 // 보여줄 정보
 public class UserResponse {
-    private String userId;
+    private String email;
     private String userName;
 
     public UserResponse(User user){
-        this.userId = user.getUserId();
+        this.email = user.getEmail();
         this.userName = user.getUserName();
     }
 }

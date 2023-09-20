@@ -18,7 +18,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true)
-    private String userId;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -26,8 +26,8 @@ public class User {
     @Column(nullable = false)
     private  String userName;
 
-    @Column(unique = true)
-    private String email;
+//    @Column(unique = true)
+//    private String email;
 
     private String gender;
 
@@ -38,8 +38,7 @@ public class User {
     private UserRole userRole;
 
     // 개별적인 사용자 정보를 직접 받아와서 user엔터티 객체를 생성
-    public User( String userId, String password, String userName, String email, String gender, String birth) {
-        this.userId = userId;
+    public User( String password, String userName, String email, String gender, String birth) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -48,7 +47,6 @@ public class User {
     }
     // 가입 정보가 이미 캡슐화되어있는 경우 편리하게 사용
     public User(UserRequest userRequest) {
-        this.userId = userRequest.getUserName();
         this.password = userRequest.getPassword();
         this.userName = userRequest.getUserName();
         this.email = userRequest.getEmail();

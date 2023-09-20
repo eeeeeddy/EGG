@@ -19,7 +19,6 @@ public class UserRequest {
 
     public User toEntity(String password){
         return new User(
-                this.userId,
                 password,
                 this.userName,
                 this.email, this.gender, this.birth);

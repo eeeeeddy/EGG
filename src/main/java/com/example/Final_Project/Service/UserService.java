@@ -19,11 +19,11 @@ public class UserService {
 
     @Transactional
     public User join(User user) {
-        userRepository.findByUserId(user.getUserId())
+        userRepository.findByEmail(user.getEmail())
                 .ifPresent( user1 -> {
                     throw new HospitalReviewAppException(
                             ErrorCode.DUPLICATED_USER_NAME, String.format(
-                                    "UserId : %s",user1.getUserId()));
+                                    "UserId : %s",user1.getEmail()));
                 });
         userRepository.save(user);
         return user;
@@ -34,7 +34,7 @@ public class UserService {
     private long expiredTimeMs = 1000 * 60 * 60; //1시간 = 토큰 만료 시간
 
     public String login(String userId, String password){
-        User user = userRepository.findByUserId(userId)
+        User user = userRepository.findByEmail(userId)
                 .orElseThrow(() -> new HospitalReviewAppException(ErrorCode.USER_NOT_FOUNDED, String.format("%S는 가입된 적이 없습니다.",userId)));
 
         if(!encoder.matches(password,user.getPassword())){

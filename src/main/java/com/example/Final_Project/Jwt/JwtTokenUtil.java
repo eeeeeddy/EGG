@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class JwtTokenUtil {
     // 암호화된 형태의 토큰이 생성
-    public static String createToken(String userId, String key, long expireTimesMS){
+    public static String createToken(String email, String key, long expireTimesMS){
         Claims claims = Jwts.claims();
-        claims.put("userId", userId);
+        claims.put("email", email);
 
         return Jwts.builder()
                 .setClaims(claims)

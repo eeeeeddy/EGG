@@ -27,8 +27,10 @@ public class UserController {
 
     @PostMapping("/login")
     public Response<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest){
-        String token = userService.login(userLoginRequest.getUserId(), userLoginRequest.getPassword());
+        String token = userService.login(userLoginRequest.getEmail(), userLoginRequest.getPassword());
         return Response.success(new UserLoginResponse(token));
     }
     // token 을 UserLoginResponse 객체에 담은 뒤, 반환
+
+
 }
