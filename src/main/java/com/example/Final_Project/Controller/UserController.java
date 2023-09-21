@@ -9,12 +9,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("users")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
     private final UserService userService;
     private final BCryptPasswordEncoder encoder;
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/checkEmail")
+    public Response<CheckEmailResponse> checkEmail(@RequestParam String email) {
+        boolean emailExists = userService.checkEmailExists(email);
+        return Response.success(new CheckEmailResponse(emailExists));
+    }
 
     @CrossOrigin(origins = "http://localhost:3000") // CORS 설정
     @PostMapping("/join")
@@ -25,6 +32,7 @@ public class UserController {
         return Response.success(userJoinResponse);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000") // CORS 설정
     @PostMapping("/login")
     public Response<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest){
         String token = userService.login(userLoginRequest.getEmail(), userLoginRequest.getPassword());

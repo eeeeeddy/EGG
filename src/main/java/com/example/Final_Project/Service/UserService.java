@@ -29,6 +29,7 @@ public class UserService {
         return user;
     }
 
+
     @Value("${jwt.token.secret}")
     private String secretKey;
     private long expiredTimeMs = 1000 * 60 * 60; //1시간 = 토큰 만료 시간
@@ -44,5 +45,8 @@ public class UserService {
         return JwtTokenUtil.createToken(userId,secretKey,expiredTimeMs);
         // 정상적으로 로그인을 마친 경우 userId, secretKey, expiredTimeMs을 통해서 문자열 형태의 토큰을 생성한 뒤 반환한다.
     }
-
+    public boolean checkEmailExists(String email) {
+        // 이메일이 데이터베이스에 존재하는지 확인하고 존재하면 true, 존재하지 않으면 false를 반환
+        return userRepository.existsByEmail(email);
+    }
 }
