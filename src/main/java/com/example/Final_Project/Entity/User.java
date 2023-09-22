@@ -26,9 +26,6 @@ public class User {
     @Column(nullable = false)
     private  String userName;
 
-//    @Column(unique = true)
-//    private String email;
-
     private String gender;
 
     private String birth;
@@ -60,5 +57,11 @@ public class User {
     }
 
 
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public void setBirth(String birth) {
+//        this.birth = birth;
+    }
 
-}
