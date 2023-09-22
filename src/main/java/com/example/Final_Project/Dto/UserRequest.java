@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 // 받아올 정보
 public class UserRequest {
-    private String userId;
+    private String email;
     private String password;
     private String userName;
-    private String email;
     private String gender;
     private String birth;
 
