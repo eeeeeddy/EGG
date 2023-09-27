@@ -1,5 +1,6 @@
 package com.example.Final_Project.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,9 +14,9 @@ import javax.persistence.*;
 public class Author {
     // 깃 디벨롭 테스트
     @Id
-    @Column(nullable = false, unique = true)
+    @Column(name="author_id", nullable = false, unique = true)
     // 저자 아이디
-    private String author_id;
+    private String authorId;
 
     // 저자 이름
     private String name;
@@ -23,7 +24,8 @@ public class Author {
     // 저자 소속
     private String institution;
 
-    // 작성 논문 테이블 (AuthorArticleList 연결 관련)
-    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AuthorArticleList authorArticleList;
+//    // 작성 논문 테이블 (AuthorArticleList 연결 관련)
+//    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonIgnore // 순환 참조 방지
+//    private AuthorArticleList authorArticleList;
 }
