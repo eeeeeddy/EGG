@@ -2,12 +2,14 @@ package com.example.Final_Project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.bind.annotation.CrossOrigin;
 // 스프링 부트 애블리케이션임을 나타냄
 // 자동 구성을 활성화하며 클래스패스 스캔을 통해 spring Bean을 자동을 구성
 // 내장 웹서버를 시작하고 웹을 실행
 
 @SpringBootApplication
+@EnableJpaAuditing
 @CrossOrigin(origins = "http://localhost:3000") // CORS 설정
 public class FinalProjectApplication {
 //public static void main(String[] args) = 진입점

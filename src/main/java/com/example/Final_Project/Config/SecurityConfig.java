@@ -1,36 +1,53 @@
 package com.example.Final_Project.Config;
 
-
+import com.example.Final_Project.Security.JwtAuthenticationFilter;
+import com.example.Final_Project.Security.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 @EnableWebSecurity
+@RequiredArgsConstructor
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-    //Http Security 설정
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .httpBasic().disable()
-                //기본 ui 사용, 사용하지 않을 시 disable()
-                .csrf().disable()
-                //REST API에서 csrf 보안이 필요없기 때문에 비활성화,
-                .cors().and()
-                .authorizeRequests()
-                // 요청에 대한 사용 권한을 체크
-                .antMatchers("/api/**").permitAll()
-                //antMatchers 파라미터로 설정한 리소스 접근을 인증절차 없이 허용
-                .antMatchers("/users/join", "/users/login").permitAll()
-                //antMatchers 파라미터로 설정한 리소스 접근을 인증절차 없이 허용
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                //STATELESS로 설정함으로서 인증 정보를 서버에 담아두지 않음,JWT 토큰을 사용할 것이기 때문
-                .and()
-                .build();
-    }
 
+    private final JwtTokenProvider jwtTokenProvider;
+    private final RedisTemplate redisTemplate;
+
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().disable()
+                .csrf().disable()
+                .formLogin().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/v1/users/sign-up", "/api/v1/users/login", "/api/v1/users/authority", "/api/v1/users/reissue", "/api/v1/users/logout").permitAll()
+                .antMatchers("/api/v1/users/userTest").hasRole("USER")
+                .antMatchers("/api/v1/users/adminTest").hasRole("ADMIN")
+
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+        // JwtAuthenticationFilter를 UsernamePasswordAuthentictaionFilter 전에 적용시킨다.
+    }
+    // 암호화에 필요한 PasswordEncoder Bean 등록
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
+
