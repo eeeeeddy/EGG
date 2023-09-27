@@ -2,7 +2,7 @@ package com.example.Final_Project.Service;
 
 import com.example.Final_Project.Entity.User;
 import com.example.Final_Project.Enum.ErrorCode;
-import com.example.Final_Project.Jwt.JwtTokenUtil;
+import com.example.Final_Project.Util.JwtTokenUtil;
 import com.example.Final_Project.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

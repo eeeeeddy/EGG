@@ -2,6 +2,7 @@ package com.example.Final_Project.Config;
 
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,7 +23,7 @@ public class SecurityConfig {
                 // 요청에 대한 사용 권한을 체크
                 .antMatchers("/api/**").permitAll()
                 //antMatchers 파라미터로 설정한 리소스 접근을 인증절차 없이 허용
-                .antMatchers("api/v1/users/join", "/api/v1/users/login").permitAll()
+                .antMatchers("/users/join", "/users/login").permitAll()
                 //antMatchers 파라미터로 설정한 리소스 접근을 인증절차 없이 허용
                 .and()
                 .sessionManagement()

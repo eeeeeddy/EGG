@@ -1,4 +1,4 @@
-package com.example.Final_Project.Jwt;
+package com.example.Final_Project.Util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -22,4 +22,8 @@ public class JwtTokenUtil {
                 //해싱 알고리즘으로 입력받은 키를 암호화
                 .compact();
     }
+
+    // TokenProvider 부분
+
+
 }
