@@ -7,6 +7,7 @@ import com.example.Final_Project.Service.Helper;
 import com.example.Final_Project.Service.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -60,8 +61,13 @@ public class UsersController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestBody @Validated UserRequestDto.Logout logout, Errors errors) {
+    public ResponseEntity<?> logout(@RequestBody(required = false) @Validated UserRequestDto.Logout logout, Errors errors) {
         // validation check
+        if (logout == null) {
+            // 요청 바디가 누락된 경우
+            return response.fail("요청 바디가 누락되었습니다.", HttpStatus.BAD_REQUEST);
+        }
+
         System.out.println(logout.getAccessToken());
         System.out.println(logout.getRefreshToken());
 
