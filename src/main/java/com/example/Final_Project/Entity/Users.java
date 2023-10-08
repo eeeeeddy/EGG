@@ -18,13 +18,14 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Users extends BaseTime implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "email")
     private String email;
 
     @Column(nullable = false)
@@ -73,4 +74,7 @@ public class Users extends BaseTime implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    @OneToMany(mappedBy = "userEmail", cascade = CascadeType.ALL)
+    private List<SavePaper> savePapers;
+
 }
