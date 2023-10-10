@@ -15,15 +15,45 @@ public class ElasticSearch {
     @Id
     private String articleID;
 
-    private String keyword;
+    private String journalName;
+
+    private String journalPublisher;
+
+    private String pubYear;
+
+    private String pubMon;
+
+    private String volume;
+
+    private String issue;
+
+    private String articleCategories;
+
+    private String articleRegularity;
 
     private String titleKor;
 
+    private String titleEng;
+
+    private String authors;
+
     private String abstractKor;
 
-    private String journalName;
+    private String abstractEng;
 
-    private String author1ID;
+    private String fpage;
 
-    private String author1Inst;
+    private String lpage;
+
+    private String citations;
+
+    private String url;
+
+    private String verified;
+
+    private String doi;
+
+    private String uci;
+
+    private String keyword;
 }

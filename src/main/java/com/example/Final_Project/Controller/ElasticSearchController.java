@@ -72,7 +72,7 @@ public class ElasticSearchController {
                     .build();
 
             // Elasticsearch에서 Spring Data Elasticsearch의 NativeSearchQuery를 사용하여 검색합니다.
-            SearchHits<ElasticSearch> searchHits = elasticsearchRestTemplate.search(searchQuery, ElasticSearch.class, IndexCoordinates.of("kci"));
+            SearchHits<ElasticSearch> searchHits = elasticsearchRestTemplate.search(searchQuery, ElasticSearch.class, IndexCoordinates.of("article"));
 
             // 검색 결과에서 데이터를 추출하여 리스트에 추가합니다.
             searchHits.forEach(searchHit -> {
