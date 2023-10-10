@@ -3,6 +3,8 @@ package com.example.Final_Project.Entity;
 import co.elastic.clients.elasticsearch.xpack.usage.Base;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,16 +14,16 @@ import javax.validation.constraints.Email;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityScan
+@EnableJpaRepositories
 public class SavePaper {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(nullable = false)
-            //(nullable = false, unique = true)
-    // 논문 Id
-    private String article_id;
+    @Column(nullable = false, unique = true)
+    private String articleId;
 
     @Lob
     // 한글 제목

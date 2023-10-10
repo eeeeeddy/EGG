@@ -22,8 +22,4 @@ public class JwtTokenUtil {
                 //해싱 알고리즘으로 입력받은 키를 암호화
                 .compact();
     }
-
-    // TokenProvider 부분
-
-
 }

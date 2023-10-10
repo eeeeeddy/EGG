@@ -29,24 +29,31 @@ public class SaveController {
     private UsersRepository usersRepository;
 
     @Autowired
-    public SaveController(SaveService saveService, SaveRepository saveRepository, UsersRepository usersRepository){
+    public SaveController(SaveService saveService, SaveRepository saveRepository, UsersRepository usersRepository) {
         this.saveService = saveService;
         this.saveRepository = saveRepository;
         this.usersRepository = usersRepository;
     }
 
     @PostMapping("/papers")
-    public ResponseEntity<SavePaper> saveSavePaper(@RequestBody SavePaper savePaper) {
+    public ResponseEntity<?> saveSavePaper(@RequestBody SavePaper savePaper) {
         try {
-            // Spring Security를 사용하여 현재 사용자의 이메일 가져오기
+            // 현재 사용자의 Authentication 객체 가져오기
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            // 현재 사용자의 이메일 가져오기
             String userEmail = authentication.getName(); // 현재 사용자의 이메일
 
-            if (userEmail != null) {
+            if (userEmail != null && !userEmail.equals("anonymousUser")) {
                 System.out.println("User Email: " + userEmail);
                 savePaper.setUserEmail(userEmail); // SavePaper 엔티티의 userEmail 필드 설정
             } else {
-                System.out.println("User Email is null.");
+                System.out.println("User Email is null or anonymousUser.");
+            }
+
+            // 이미 저장되었는지 확인
+            if (saveRepository.existsByArticleIdAndUserEmail(savePaper.getArticleId(), userEmail)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 저장되었습니다.");
             }
 
             SavePaper savedPaper = saveService.savePaper(savePaper);

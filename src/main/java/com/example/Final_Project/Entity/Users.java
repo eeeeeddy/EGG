@@ -38,6 +38,13 @@ public class Users extends BaseTime implements UserDetails {
 
     private String birth;
 
+    public void addRole(String roleName) {
+        if (this.roles == null) {
+            this.roles = new ArrayList<>();
+        }
+        this.roles.add(roleName);
+    }
+
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

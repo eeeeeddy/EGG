@@ -58,6 +58,10 @@ public class JwtTokenProvider {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
+        // 디버그 프린트: AccessToken과 RefreshToken 출력
+        log.debug("Generated AccessToken: {}", accessToken);
+        log.debug("Generated RefreshToken: {}", refreshToken);
+
         return UserResponseDto.TokenInfo.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
