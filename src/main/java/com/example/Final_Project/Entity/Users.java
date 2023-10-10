@@ -25,6 +25,7 @@ public class Users extends BaseTime implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, name = "email")
     private String email;
 
@@ -81,7 +82,7 @@ public class Users extends BaseTime implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    @OneToMany(mappedBy = "userEmail", cascade = CascadeType.ALL)
-    private List<SavePaper> savePapers;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<SavePaper> savePapers;
 }

@@ -19,7 +19,7 @@ public class Article {
     @Id
     @Column(nullable = false, unique = true)
     // 논문 Id
-    private String article_id;
+    private String articleId;
 
     @Lob
     // 한글 제목

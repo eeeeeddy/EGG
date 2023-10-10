@@ -4,6 +4,7 @@ import com.example.Final_Project.Entity.SavePaper;
 import com.example.Final_Project.Entity.Users;
 import com.example.Final_Project.Repository.SaveRepository;
 import com.example.Final_Project.Repository.UsersRepository;
+import com.example.Final_Project.Security.SecurityUtil;
 import com.example.Final_Project.Service.SaveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Email;
+import java.util.Optional;
 
 @RestController
 @Validated
@@ -39,14 +43,22 @@ public class SaveController {
     public ResponseEntity<?> saveSavePaper(@RequestBody SavePaper savePaper) {
         try {
             // 현재 사용자의 Authentication 객체 가져오기
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
             // 현재 사용자의 이메일 가져오기
-            String userEmail = authentication.getName(); // 현재 사용자의 이메일
+//            String userEmail = authentication.getName(); // 현재 사용자의 이메일
+            String userEmail = SecurityUtil.getCurrentUserEmail(); // 현재 사용자의 이메일
+
+            System.out.println(userEmail);
+
 
             if (userEmail != null && !userEmail.equals("anonymousUser")) {
-                System.out.println("User Email: " + userEmail);
-                savePaper.setUserEmail(userEmail); // SavePaper 엔티티의 userEmail 필드 설정
+                Optional<Users> currentUser = usersRepository.findByEmail(userEmail); // 이메일로 사용자를 조회하여 가져옴
+                if (currentUser.isPresent()) {
+                    savePaper.setUser(currentUser.get()); // SavePaper 엔티티의 user 필드에 사용자 설정
+                } else {
+                    System.out.println("User not found.");
+                }
             } else {
                 System.out.println("User Email is null or anonymousUser.");
             }
@@ -62,6 +74,8 @@ public class SaveController {
             System.out.println("ResponseEntity: " + responseEntity);
 
             return responseEntity;
+
+//            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
