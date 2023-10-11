@@ -12,4 +12,6 @@ public interface SaveRepository extends JpaRepository<SavePaper, Long> {
     boolean existsByArticleIdAndUserEmail(String articleId, String userEmail);
 
     List<SavePaper> findByUserEmail(String  userEmail);
+
+    void deleteByArticleIdAndUserEmail(String articleId, String userEmail);
 }

@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +99,29 @@ public class SaveController {
             }
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 저장된 논문이 없을 경우
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @Transactional
+    @DeleteMapping("/papers/{article_id}")
+    public ResponseEntity<?> deleteSavePaper(@PathVariable String article_id) {
+        try {
+            // 현재 사용자의 이메일 가져오기
+            String userEmail = SecurityUtil.getCurrentUserEmail();
+
+            if (userEmail != null && !userEmail.equals("anonymousUser")) {
+                if (saveRepository.existsByArticleIdAndUserEmail(article_id, userEmail)) {
+                    saveRepository.deleteByArticleIdAndUserEmail(article_id, userEmail);
+                    return ResponseEntity.ok().build();
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 논문이 저장되지 않았습니다.");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증이 필요합니다.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
