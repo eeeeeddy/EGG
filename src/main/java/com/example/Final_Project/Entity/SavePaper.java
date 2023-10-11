@@ -1,13 +1,11 @@
 package com.example.Final_Project.Entity;
 
-import co.elastic.clients.elasticsearch.xpack.usage.Base;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -61,15 +59,11 @@ public class SavePaper {
     @Lob
     private String abstract_en;
 
-    private String userEmail;
-
-    // Getter 및 Setter 추가
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    @ManyToOne
+    @JoinColumn(name = "userEmail")
+    private Users user; //user:savepaper = 1:n
+    public void setUser(Users user) {
+        this.user = user;
     }
 
 }
