@@ -13,6 +13,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class ElasticSearch {
 
     @Id
+    private String id2;
+
     private String articleID;
 
     private String journalName;
