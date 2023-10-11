@@ -1,5 +1,6 @@
 package com.example.Final_Project.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -60,7 +61,8 @@ public class SavePaper {
     private String abstract_en;
 
     @ManyToOne
-    @JoinColumn(name = "userEmail")
+    @JsonIgnore
+    @JoinColumn(name = "userEmail", referencedColumnName = "email")
     private Users user; //user:savepaper = 1:n
     public void setUser(Users user) {
         this.user = user;

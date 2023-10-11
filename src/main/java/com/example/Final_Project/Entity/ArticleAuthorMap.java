@@ -22,5 +22,6 @@ public class ArticleAuthorMap {
 
     @ManyToOne
     @JoinColumn
+//    (name = "article", referencedColumnName = "article_id")
     private Article article;
 }

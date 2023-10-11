@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Email;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -76,6 +77,27 @@ public class SaveController {
             return responseEntity;
 
 //            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    @GetMapping("/papers")
+    public ResponseEntity<List<SavePaper>> getSavedPapers() {
+        try {
+            // 현재 사용자의 이메일 가져오기
+            String userEmail = SecurityUtil.getCurrentUserEmail();
+
+            if (userEmail != null && !userEmail.equals("anonymousUser")) {
+                List<SavePaper> savedPapers = saveRepository.findByUserEmail(userEmail);
+
+                // 만약 저장된 논문이 없을 경우, 빈 리스트를 반환할 수도 있습니다.
+                if (savedPapers != null && !savedPapers.isEmpty()) {
+                    return new ResponseEntity<>(savedPapers, HttpStatus.OK);
+                }
+            }
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 저장된 논문이 없을 경우
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

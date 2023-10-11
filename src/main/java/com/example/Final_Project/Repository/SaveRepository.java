@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface SaveRepository extends JpaRepository<SavePaper, Long> {
     boolean existsByArticleIdAndUserEmail(String articleId, String userEmail);
+
+    List<SavePaper> findByUserEmail(String  userEmail);
 }
