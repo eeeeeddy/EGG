@@ -1,13 +1,15 @@
+%spark.pyspark
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from pyspark.sql.functions import udf, explode, collect_list, size, expr, struct, col, when, array_contains
-from pyspark.sql.types import StringType, ArrayType, StructType, StructField
-from pyspark.sql.types import ArrayType, FloatType
+from pyspark.sql.types import StringType, ArrayType, StructType, StructField,FloatType
 import numpy as np
 import pandas as pd
 import ast
 from pymongo import MongoClient
 import datetime
+import matplotlib.pyplot as plt
+import networkx as nx
 
 # 세션 생성 및 디비 연동
 spark = SparkSession.builder.appName("preprocessingSpakr").getOrCreate()
@@ -15,26 +17,23 @@ client = MongoClient('mongodb://ditto:AbBaDittos!230910*@localhost', 27017)
 
 pd.DataFrame.iteritems = pd.DataFrame.items
 
-
 current_datetime = datetime.datetime.now()
 year = current_datetime.year
 month = current_datetime.month
 one_month_ago = current_datetime - datetime.timedelta(days=current_datetime.day)
 one_month_ago = one_month_ago.month
 
-    
 def parse_list(value):
     return ast.literal_eval(value) if value else []
     
 parse_list_udf = udf(parse_list, ArrayType(StringType()))
 
-def get_origin_kci_data():
+def get_kci_data(df_name):
     
-    previous_col_name = "kci_trained_{:04d}{:02d}".format(year, one_month_ago)
-    print('Get ',previous_col_name,"!")
+    print('Get ',df_name,"!")
     kci_db_name = "kci_trained_api"
     kci_db = client[kci_db_name]
-    kci_data = list(kci_db[previous_col_name].find({}))
+    kci_data = list(kci_db[df_name].find({}))
 
     pandas_df = pd.DataFrame(kci_data)
     pandas_df = pandas_df[['articleID','titleEng','abstractEng','journalID','pubYear','refereceTitle', 'keys', 'ems']]
@@ -46,30 +45,6 @@ def get_origin_kci_data():
 
 
     return spark_df
-
-def get_new_kci_data():
-
-    input_col_name = "kci_trained_{:04d}{:02d}".format(year, month)
-    print('Get ',input_col_name,"!")
-
-    kci_db_name = "kci_trained_api"
-    kci_db = client[kci_db_name]
-    kci_data = list(kci_db[input_col_name].find({}))
-
-    pandas_df = pd.DataFrame(kci_data)
-    pandas_df = pandas_df[['articleID','titleEng','abstractEng','journalID','pubYear','refereceTitle', 'keys', 'ems']]
-    pandas_df['ems'] = pandas_df['ems'].apply(lambda x: np.array([float(val) for val in x.strip('[]').split()]))
-
-    pandas_df = pandas_df.astype(str)
-
-
-    #Spark DataFrame으로 변환
-    spark_df = spark.createDataFrame(pandas_df)
-    spark_df = spark_df.withColumn("refereceTitle", parse_list_udf(spark_df["refereceTitle"]))
-    spark_df = spark_df.withColumn("keys", parse_list_udf(spark_df["keys"]))
-
-    return spark_df
-
 
 def get_reference_map_data():
     print('Get Reference Map!')
@@ -156,19 +131,41 @@ def process_grouped_dataframe(input_df):
     
 def save_final_kci_data(final_df):
     final = final_df.toPandas()
-    output_col_name = "kci_CcGraph_{:04d}{:02d}".format(year, month)
+    output_col_name = "kci_CcGraph{:04d}{:02d}".format(year, month)
     db = client.get_database('kci_ccGraph')
     cl = db.get_collection(output_col_name)
     final = final.to_dict('records')
     cl.insert_many(final)
     print("saved ",output_col_name,"!")
 
+def generate_and_save_graph(df):
+    print("Generate CcGrpah")
+    G = nx.Graph()
 
-origin_df = get_origin_kci_data()
-new_df = get_new_kci_data()
+    for row in df.rdd.collect():
+        article_id = row['articleID']
+        G.add_node(article_id)
+
+    # 아티클 리스트를 기준으로 엣지(링크)를 추가
+    for row in df.rdd.collect():
+        article_id = row['articleID']
+        article_list = row['article_list']
+        for reference in article_list:
+            G.add_edge(article_id, reference)
+            
+    graphname = "CcGraph{:04d}{:02d}.graphml".format(year, month)
+    nx.write_graphml(G, graphname)
+    print('Saved',graphname)
+
+previous_col_name = "kci_trained_{:04d}{:02d}".format(year, one_month_ago)
+current_col_name = "kci_trained_{:04d}{:02d}".format(year, month)
+origin_df = get_kci_data(previous_col_name)
+new_df = get_kci_data(current_col_name)
+
+
 refer_df = get_reference_map_data()
 renew_df = renew_reference_map_data(new_df, refer_df)
 merged_df = merge_origin_new_df(origin_df, new_df, refer_df)
 result_df = process_grouped_dataframe(merged_df)
 save_final_kci_data(result_df)
-
+generate_and_save_graph(result_df)
