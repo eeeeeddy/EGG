@@ -8,65 +8,84 @@ import networkx as nx
 import json
 from fastapi.middleware.cors import CORSMiddleware
 import sys
+
 sys.path.append('/home/ubuntu/Egg')
 from Dto.GraphDTO import GraphDTO
 from Dto.nodeDTO import NodeDTO
 from Dto.LinkDTO import LinkDTO
+
 app = FastAPI()
 app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["http://localhost:3000"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-        )
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # MongoDB 연결 정보 설정
-client = MongoClient( 'mongodb://ditto:AbBaDittos!230910*@3.37.153.14', 27017)
-kci_db_name = "Egg_"
-kci_db = client[kci_db_name]
-kci_db_col = "egg_CCgraph_data"
-kci_data = list(kci_db[kci_db_col].find({}))
+client = MongoClient('mongodb://ditto:AbBaDittos!230910*@3.37.153.14', 27017)
 
-kci_db_col_au = "egg_Augraph_Data"
-kci_data_au = list(kci_db[kci_db_col_au].find({}))
 
 loaded_Au_G = nx.read_graphml('Authorgraph.graphml')
-loaded_G = nx.read_graphml('CCgraph202310.graphml')
+loaded_CC_G = nx.read_graphml('CCgraph202310.graphml')
 
-df = pd.DataFrame(kci_data)
-#df = df[['articleID','author1ID','titleKor','citations','journalID','journalName','abstractKor','pubYear', 'keys', 'ems']]
-df = df[['articleID','titleKor','author1Name','author1ID','journalName','pubYear','citations' ,'abstractKor','keys', 'ems']]
-df = df.rename(columns={
-    'articleID': 'article_id',
-    'titleKor': 'title_ko',
-    'author1Name': 'author_name',
-    'author1ID': 'author_id',
-    'journalName': 'journal_name',
-    'pubYear': 'pub_year',
-    'citations': 'citation',
-    'abstractKor': 'abstract_ko',
-    'keys': 'keys',
-    'ems': 'ems'
-})
-df['ems'] = df['ems'].apply(lambda x: np.array([float(val) for val in x.strip('[]').split()]))
+def get_CC_Graph():
+    kci_db_name = "Egg_"
+    kci_db = client[kci_db_name]
+    kci_db_col = "Egg_CCgraph_Data"
+    kci_data = list(kci_db[kci_db_col].find({}))
+    df = pd.DataFrame(kci_data)
+    convert_col_name =['articleID', 'titleKor', 'author1Name', 'author1ID','author1Inst', 'author2IDs','author2Names','author2Insts' ,'journalName', 'pubYear', 'citations','class', 'abstractKor','keys','ems']
+    df = df[convert_col_name]
+    df = df.rename(columns={
+        'articleID': 'article_id',
+        'titleKor': 'title_ko',
+        'author1Name': 'author_name',
+        'author1ID': 'author_id',
+        'author1Inst': 'author_inst',
+        'journalName': 'journal_name',
+        'pubYear': 'pub_year',
+        'citations': 'citation',
+        'abstractKor': 'abstract_ko',
+        'author2IDs' : 'author2_id',
+        'author2Names': 'author2_name',
+        'author2Insts' : 'author2_inst',
+        'class' : 'category',
+        'keys': 'keys',
+        'ems': 'ems'
+    })
+    df['ems'] = df['ems'].apply(lambda x: np.array([float(val) for val in x.strip('[]').split()]))
+    df['author2_id'] = df['author2_id'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['author2_name'] = df['author2_name'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['author2_inst'] = df['author2_inst'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    print(df.columns)
+    return df
 
-def get_item_by_article_id(item_id):
-    search_list = item_id.split('+')
-    print(search_list)
-    #search_list.append(item_id)
-    # search_list = ['ART002742767','ART002895765','ART002514031','ART002744016']
+def get_AU_Graph():
+    kci_db_name = "Egg_"
+    kci_db = client[kci_db_name]
+    kci_db_col_au = "egg_Augraph_Data"
+    kci_data = list(kci_db[kci_db_col_au].find({}))
+    df = pd.DataFrame(kci_data)
+
+    return df
+
+def get_unique_nodes(search_list, G):
     subgraph_nodes = []
     subgraph_edges = []
     for search in search_list:
-        subgraph = nx.ego_graph(loaded_G, search, radius=1)
+        subgraph = nx.ego_graph(G, search, radius=1)
         subgraph_nodes.extend(list(subgraph.nodes()))
         subgraph_edges.extend(list(subgraph.edges()))
-    unique_nodes = list(set(subgraph_nodes))
-    unique_edges = list(set(subgraph_edges))
 
+    unique_nodes = list(set(subgraph_nodes))
+    return unique_nodes
+
+def filtering_df(df, search_list, unique_nodes, indicator):
     filtered_df = df[df['article_id'].isin(unique_nodes)]
+
     for search in search_list:
         col_name = f'Similarity_{search}'
         filtered_df.loc[:, col_name] = calculate_cosine_similarity(filtered_df, search)
@@ -78,47 +97,63 @@ def get_item_by_article_id(item_id):
     for search in search_list:
         filtered_df.loc[filtered_df['article_id'] == search, 'Similarity_AVG'] = 1
 
-    # Similarity_AVG가 0.95보다 큰 행 선택
-    filtered_df = filtered_df[filtered_df['Similarity_AVG'] > 0.93]
-    print(len(filtered_df))
-    
-
-    filtered_df.reset_index(inplace=True,drop=True)
+    # Similarity_AVG가 indicator 보다 큰 행 선택
+    filtered_df = filtered_df[filtered_df['Similarity_AVG'] > indicator]
+    filtered_df.reset_index(inplace=True, drop=True)
     filtered_df['id'] = range(0, len(filtered_df))
-  #  desired_column_order = ['id','articleID', 'author1ID', 'titleKor', 'citations', 'journalID',    'journalName', 'abstractKor', 'pubYear', 'keys', 'Similarity_AVG']
 
-    desired_column_order = ['id','article_id', 'title_ko', 'author_name', 'author_id', 'journal_name','pub_year', 'citation', 'abstract_ko','Similarity_AVG']    
+    desired_column_order = ['id', 'article_id', 'title_ko', 'author_name', 'author_id','author_inst','author2_id','author2_name','author2_inst','journal_name', 'pub_year', 'category'
+                            ,'citation', 'abstract_ko', 'Similarity_AVG']
     filtered_df = filtered_df[desired_column_order]
 
+    return filtered_df
 
-    final_ids = list(filtered_df['article_id'])
-    filtered_subgraph = loaded_G.subgraph(final_ids)
+def set_link_data_form(filtered_df,search_list,final_ids):
+    filtered_subgraph = loaded_CC_G.subgraph(final_ids)
     filtered_subgraph = filtered_subgraph.copy()
     edges_with_weights = []
 
     # search_list의 요소(u) 를 기준으로 다른 articleID(v)와 가중치 설정
     for u in search_list:
         for v in filtered_df['article_id']:
-            if u != v:  # u와 v가 다른 경우에만 추가
-                similarity_avg = round(filtered_df[filtered_df['article_id'] == v]['Similarity_AVG'].values[0],2)
+            if u != v:  # u와 v가 다른 경우에 만 추가
+                similarity_avg = round(filtered_df[filtered_df['article_id'] == v]['Similarity_AVG'].values[0], 2)
                 edges_with_weights.append(((u, v), similarity_avg))
 
     for (u, v), weight in edges_with_weights:
         filtered_subgraph.add_edge(u, v, weight=weight)
+
+    # front-end 전달을 위한 Form 변환
     replace_mapping = dict(enumerate(filtered_df['article_id'].unique()))
     reverse_mapping = {v: k for k, v in replace_mapping.items()}
-    edge_list_as_indices = [(reverse_mapping[node1], reverse_mapping[node2], data.get('weight', 0.0)) for node1, node2, data in filtered_subgraph.edges(data=True)]
+    edge_list_as_indices = [(reverse_mapping[node1], reverse_mapping[node2], data.get('weight', 0.0)) for
+                            node1, node2, data in filtered_subgraph.edges(data=True)]
     edge_list_as_indices_json = json.dumps(edge_list_as_indices)
     edge_list_as_indices = json.loads(edge_list_as_indices_json)
-    edge_list_as_objects = [{"source": source, "target": target, "distance": dist} for source, target, dist in edge_list_as_indices]
-    
+    edge_list_as_objects = [{"source": source, "target": target, "distance": dist} for source, target, dist in
+                            edge_list_as_indices]
+    return edge_list_as_objects
 
-    json_data = filtered_df.to_json(orient='records', force_ascii=False)
-    jj = json.loads(json_data)
 
-    combined_data = {"nodes": jj, "links": edge_list_as_objects}
+def set_node_data_form(filtered_df):
+    node_data = filtered_df.to_json(orient='records', force_ascii=False)
+    nodes = json.loads(node_data)
+    return nodes
+def get_graph_by_article_id(item_id):
 
-    return combined_data
+    search_list = item_id.split('+')
+    df = get_CC_Graph()
+    unique_nodes = get_unique_nodes(search_list, loaded_CC_G)
+    filtered_df = filtering_df(df, search_list, unique_nodes, 0.93)
+    final_ids = list(filtered_df['article_id'])
+
+    links_data = set_link_data_form(filtered_df, search_list, final_ids)
+    nodes_data = set_node_data_form(filtered_df)
+
+    nodes = [NodeDTO(**node) for node in nodes_data]
+    links = [LinkDTO(**link) for link in links_data]
+
+    return GraphDTO(nodes=nodes, links=links)
 
 def calculate_cosine_similarity(df, search):
     res = []
@@ -126,7 +161,7 @@ def calculate_cosine_similarity(df, search):
     p = np.array(standard['ems'].values[0])
 
     # 유사도 계산
-    for _,row in df.iterrows():
+    for _, row in df.iterrows():
         q = row['ems']
         dot_product = np.dot(p, q)
 
@@ -137,29 +172,32 @@ def calculate_cosine_similarity(df, search):
         # 코사인 유사도를 계산합니다.
         cosine_similarity = dot_product / (magnitude_A * magnitude_B)
         res.append(cosine_similarity)
-    
+
     return res
 
 
 def get_item_by_author_id(author_id):
-    adf = pd.DataFrame(kci_data_au)
+    adf = get_AU_Graph()
     subgraph = nx.ego_graph(loaded_Au_G, author_id, radius=1)
     subgraph_nodes = subgraph.nodes()
     subgraph_edges = subgraph.edges(data=True)
-    
+
     filtered_df = adf[adf['authorID'].isin(subgraph_nodes)]
-    filtered_df.reset_index(inplace=True,drop=True)
+    filtered_df.reset_index(inplace=True, drop=True)
     filtered_df['id'] = range(0, len(filtered_df))
-    desired_column_order = ['id','authorID', 'author1Name', 'author1Inst', 'articleIDs','with_author2IDs', 'with_author1IDs', 'citations', 'journalIDs', 'pubYears', 'word_cloud']
+    desired_column_order = ['id', 'authorID', 'author1Name', 'author1Inst', 'articleIDs', 'with_author2IDs',
+                            'with_author1IDs', 'citations', 'journalIDs', 'pubYears', 'word_cloud']
     filtered_df = filtered_df[desired_column_order]
     replace_mapping = dict(enumerate(filtered_df['authorID'].unique()))
     reverse_mapping = {v: k for k, v in replace_mapping.items()}
-    edge_list_as_indices = [(reverse_mapping[node1], reverse_mapping[node2], data.get('weight', 1.0)) for node1, node2, data in subgraph_edges]
-    
+    edge_list_as_indices = [(reverse_mapping[node1], reverse_mapping[node2], data.get('weight', 1.0)) for
+                            node1, node2, data in subgraph_edges]
+
     edge_list_as_indices_json = json.dumps(edge_list_as_indices)
     edge_list_as_indices = json.loads(edge_list_as_indices_json)
-    edge_list_as_objects = [{"source": source, "target": target, "distance": dist} for source, target, dist in edge_list_as_indices]
-    
+    edge_list_as_objects = [{"source": source, "target": target, "distance": dist} for source, target, dist in
+                            edge_list_as_indices]
+
     json_data = filtered_df.to_json(orient='records', force_ascii=False)
     jj = json.loads(json_data)
     combined_data = {"nodes": jj, "links": edge_list_as_objects}
@@ -169,39 +207,34 @@ def get_item_by_author_id(author_id):
 
 def check_mongodb_connection():
     try:
-        # MongoDB 서버에 연결을 시도하고 1초 동안 대기
         client.server_info()
         return True
     except ServerSelectionTimeoutError:
         return False
 
+
 @app.get("/")
 def test_mongodb_connection():
     if check_mongodb_connection():
-        return pandas_df.head(1).to_dict(orient='records')
+        return {"message": "성공"}
     else:
         return {"message": "실패"}
 
-@app.get("/Detail/{article_id}")
-def get_item(article_id: str):
-    print(article_id)
-    item = get_item_by_article_id(article_id)
-    if item:
-        nodes_data = item["nodes"]
-        links_data = item["links"]
-        nodes = [NodeDTO(**node) for node in nodes_data]
-        links = [LinkDTO(**link) for link in links_data]
-        graph_data = GraphDTO(nodes=nodes, links=links)
-        #print(links_data)
 
-        return graph_data #graph_data  # item은 리스트 형태이므로 첫 번째 요소 반환
+@app.get("/Detail/{article_id}")
+def get_CcGarph(article_id: str):
+    graph = get_graph_by_article_id(article_id)
+
+    if graph:
+        return graph
     else:
-        return {"message": "Item not found"}
+        return {"message": "graph not found"}
+
 
 @app.get("/author/{author_id}")
-def get_item(author_id: str):
-    item = get_item_by_author_id(author_id)
-    if item:
-        return item  # item은 리스트 형태이므로 첫 번째 요소 반환
+def get_AuGarph(author_id: str):
+    graph = get_item_by_author_id(author_id)
+    if graph:
+        return graph
     else:
-        return {"message": "Item not found"}
+        return {"message": "graph not found"}
