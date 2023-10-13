@@ -1,7 +1,6 @@
-%spark.pyspark
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
-from pyspark.sql.functions import udf, explode, collect_list, size, expr, struct, col, when, array_contains
+from pyspark.sql.functions import udf, explode, collect_list, size, expr, struct, col, when, array_contains , flatten
 from pyspark.sql.types import StringType, ArrayType, StructType, StructField,FloatType
 import numpy as np
 import pandas as pd
