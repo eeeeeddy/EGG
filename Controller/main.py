@@ -11,9 +11,10 @@ import sys
 
 sys.path.append('/home/ubuntu/Egg')
 from Dto.GraphDTO import GraphDTO
+from Dto.AuGraphDTO import AuGraphDTO
 from Dto.nodeDTO import NodeDTO
 from Dto.LinkDTO import LinkDTO
-
+from Dto.AuthorDTO import AuthorDTO
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -66,10 +67,22 @@ def get_CC_Graph():
 def get_AU_Graph():
     kci_db_name = "Egg_"
     kci_db = client[kci_db_name]
-    kci_db_col_au = "egg_Augraph_Data"
+    kci_db_col_au = "Egg_Augraph_Data"
     kci_data = list(kci_db[kci_db_col_au].find({}))
     df = pd.DataFrame(kci_data)
+    print(df.columns)
+    
+    df['articleIDs'] = df['articleIDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['with_author2IDs'] = df['with_author2IDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['citations'] = df['citations'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['journalIDs'] = df['journalIDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['word_cloud'] = df['word_cloud'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['category'] = df['category'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
 
+    df['kiiscArticles'] = df['kiiscArticles'].astype(float)
+    df['totalArticles'] = df['totalArticles'].astype(float)
+    df['impactfactor'] = df['impactfactor'].astype(float)
+    df['H_index'] = df['H_index'].astype(float)
     return df
 
 def get_unique_nodes(search_list, G):
@@ -174,20 +187,35 @@ def calculate_cosine_similarity(df, search):
         res.append(cosine_similarity)
 
     return res
-
-
-def get_item_by_author_id(author_id):
-    adf = get_AU_Graph()
-    subgraph = nx.ego_graph(loaded_Au_G, author_id, radius=1)
-    subgraph_nodes = subgraph.nodes()
-    subgraph_edges = subgraph.edges(data=True)
-
-    filtered_df = adf[adf['authorID'].isin(subgraph_nodes)]
+def filtering_au_data(df, subgraph_nodes):
+    filtered_df = df[df['authorID'].isin(subgraph_nodes)]
     filtered_df.reset_index(inplace=True, drop=True)
     filtered_df['id'] = range(0, len(filtered_df))
-    desired_column_order = ['id', 'authorID', 'author1Name', 'author1Inst', 'articleIDs', 'with_author2IDs',
-                            'with_author1IDs', 'citations', 'journalIDs', 'pubYears', 'word_cloud']
+    print(filtered_df.columns)
+    desired_column_order = ['id', 'authorID', 'author1Name', 'author1Inst', 'articleIDs', 'with_author2IDs', 'citations', 'journalIDs','pubYears','category', 'word_cloud', 'kiiscArticles','totalArticles','impactfactor','H_index' ]
+    filtered_df = filtered_df.rename(columns={
+        'id': 'id',
+        'authorID': 'authorID',
+        'author1Name': 'author1Name',
+        'author1Inst': 'author1Inst',
+        'articleIDs': 'articleIDs',
+        'with_author2IDs': 'with_author2IDs',
+        'citations': 'citations',
+        'journalIDs': 'journalIDs',
+        'word_cloud': 'word_cloud',
+        'kiiscArticles' : 'kiiscArticles',
+        'totalArticles': 'totalArticles',
+        'impactfactor' : 'impactfactor',
+        'category' : 'category',
+        'H_index': 'H_index'
+    })
+
     filtered_df = filtered_df[desired_column_order]
+    return filtered_df
+
+
+def set_link_data_form_au(filtered_df,subgraph_edges):
+       
     replace_mapping = dict(enumerate(filtered_df['authorID'].unique()))
     reverse_mapping = {v: k for k, v in replace_mapping.items()}
     edge_list_as_indices = [(reverse_mapping[node1], reverse_mapping[node2], data.get('weight', 1.0)) for
@@ -198,11 +226,24 @@ def get_item_by_author_id(author_id):
     edge_list_as_objects = [{"source": source, "target": target, "distance": dist} for source, target, dist in
                             edge_list_as_indices]
 
-    json_data = filtered_df.to_json(orient='records', force_ascii=False)
-    jj = json.loads(json_data)
-    combined_data = {"nodes": jj, "links": edge_list_as_objects}
+    return edge_list_as_objects
 
-    return combined_data
+
+def get_item_by_author_id(author_id):
+    df = get_AU_Graph()
+    subgraph = nx.ego_graph(loaded_Au_G, author_id, radius=1)
+    subgraph_nodes = subgraph.nodes()
+    subgraph_edges = subgraph.edges(data=True)
+
+    filtered_df = filtering_au_data(df, subgraph_nodes)
+
+    links_data = set_link_data_form_au(filtered_df, subgraph_edges)
+    nodes_data = set_node_data_form(filtered_df)
+
+    nodes = [AuthorDTO(**node) for node in nodes_data]
+    links = [LinkDTO(**link) for link in links_data]
+
+    return AuGraphDTO(nodes=nodes, links=links)
 
 
 def check_mongodb_connection():
@@ -231,8 +272,9 @@ def get_CcGarph(article_id: str):
         return {"message": "graph not found"}
 
 
-@app.get("/author/{author_id}")
+@app.get("/Author/{author_id}")
 def get_AuGarph(author_id: str):
+    print('author' , author_id)
     graph = get_item_by_author_id(author_id)
     if graph:
         return graph
