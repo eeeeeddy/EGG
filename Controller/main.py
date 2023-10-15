@@ -8,17 +8,18 @@ import networkx as nx
 import json
 from fastapi.middleware.cors import CORSMiddleware
 import sys
-
 sys.path.append('/home/ubuntu/Egg')
+
 from Dto.GraphDTO import GraphDTO
 from Dto.AuGraphDTO import AuGraphDTO
 from Dto.nodeDTO import NodeDTO
 from Dto.LinkDTO import LinkDTO
 from Dto.AuthorDTO import AuthorDTO
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "https://fdda-211-209-60-55.ngrok-free.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
