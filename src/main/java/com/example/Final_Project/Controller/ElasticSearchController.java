@@ -2,15 +2,13 @@ package com.example.Final_Project.Controller;
 
 import com.example.Final_Project.Entity.ElasticSearch;
 import com.example.Final_Project.Repository.ElasticSearchRepository;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
@@ -18,7 +16,6 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +36,9 @@ public class ElasticSearchController {
     public List<ElasticSearch> findByKeyword(@PathVariable String keyword) {
         List<ElasticSearch> result = new ArrayList<>();
 
+        // 페이지 크기 설정
+        Pageable pageable = PageRequest.of(0, 20); // 페이지 0, 크기 10 (여기서 크기를 원하는 값으로 조정)
+
         try {
             // Bool 쿼리 빌더를 사용하여 "should" 절을 만듭니다.
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
@@ -56,6 +56,7 @@ public class ElasticSearchController {
             // NativeSearchQueryBuilder를 사용하여 검색 쿼리를 빌드합니다.
             NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                     .withQuery(boolQueryBuilder) // Bool 쿼리를 검색 쿼리로 설정
+                    .withPageable(pageable)     // 페이지 크기 설정
                     .build();
 
             // Elasticsearch에서 Spring Data Elasticsearch의 NativeSearchQuery를 사용하여 검색합니다.
