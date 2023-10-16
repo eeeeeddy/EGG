@@ -40,19 +40,6 @@ public class ElasticSearchController {
         List<ElasticSearch> result = new ArrayList<>();
 
         try {
-//            // Elasticsearch에서 데이터를 검색하는 쿼리를 작성
-//            SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-//            sourceBuilder.query(QueryBuilders.matchQuery("titleKor", keyword)); // 여기서 "titleKor"는 Elasticsearch 인덱스의 필드 이름입니다.
-//
-//            // Elasticsearch에 쿼리를 실행할 SearchRequest를 생성
-//            SearchRequest searchRequest = new SearchRequest(); // 인덱스를 지정하지 않은 경우 모든 인덱스에서 검색됩니다.
-//            searchRequest.source(sourceBuilder);
-//
-//            // Elasticsearch에 쿼리를 실행
-//            SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-
-
-
             // Bool 쿼리 빌더를 사용하여 "should" 절을 만듭니다.
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 
@@ -85,27 +72,4 @@ public class ElasticSearchController {
 
         return result;
     }
-
-
-
-//            // Elasticsearch에 검색 쿼리를 실행합니다.
-//            SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-//
-//            // Elasticsearch의 응답에서 검색 결과를 가져와서 리스트에 추가
-//            response.getHits().forEach(hit -> {
-//                try {
-//                    ElasticSearch elasticSearch = elasticSearchRepository.findById(hit.getId()).orElse(null);
-//                    if (elasticSearch != null) {
-//                        result.add(elasticSearch);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return result;
-//    }
 }

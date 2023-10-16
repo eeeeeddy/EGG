@@ -52,6 +52,7 @@ public class SavePaper {
 
     // 연구 분야
     private String major;
+
     // 한글 초록
     @Lob
     private String abstract_ko;
@@ -59,6 +60,9 @@ public class SavePaper {
     // 영문 초록
     @Lob
     private String abstract_en;
+
+    // 카테고리
+    private String category;
 
     @ManyToOne
     @JsonIgnore
