@@ -39,7 +39,8 @@ def get_CC_Graph():
     kci_db_col = "Egg_CCgraph_Data"
     kci_data = list(kci_db[kci_db_col].find({}))
     df = pd.DataFrame(kci_data)
-    convert_col_name =['articleID', 'titleKor', 'author1Name', 'author1ID','author1Inst', 'author2IDs','author2Names','author2Insts' ,'journalName', 'pubYear', 'citations','class', 'abstractKor','keys','ems']
+    print(df.columns)
+    convert_col_name =['articleID', 'titleKor', 'author1Name', 'author1ID','author1Inst', 'author2IDs','author2Names','author2Insts' ,'journalName', 'pubYear', 'citations','class', 'abstractKor','keywords','ems']
     df = df[convert_col_name]
     df = df.rename(columns={
         'articleID': 'article_id',
@@ -54,11 +55,12 @@ def get_CC_Graph():
         'author2IDs' : 'author2_id',
         'author2Names': 'author2_name',
         'author2Insts' : 'author2_inst',
+        'keywords': 'keys',
         'class' : 'category',
-        'keys': 'keys',
         'ems': 'ems'
     })
     df['ems'] = df['ems'].apply(lambda x: np.array([float(val) for val in x.strip('[]').split()]))
+    df['keys'] = df['keys'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['author2_id'] = df['author2_id'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['author2_name'] = df['author2_name'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['author2_inst'] = df['author2_inst'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
@@ -74,6 +76,7 @@ def get_AU_Graph():
     print(df.columns)
     
     df['articleIDs'] = df['articleIDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    df['titleKor'] = df['titleKor'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['with_author2IDs'] = df['with_author2IDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['citations'] = df['citations'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     df['journalIDs'] = df['journalIDs'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
@@ -115,10 +118,15 @@ def filtering_df(df, search_list, unique_nodes, indicator):
     filtered_df = filtered_df[filtered_df['Similarity_AVG'] > indicator]
     filtered_df.reset_index(inplace=True, drop=True)
     filtered_df['id'] = range(0, len(filtered_df))
-
-    desired_column_order = ['id', 'article_id', 'title_ko', 'author_name', 'author_id','author_inst','author2_id','author2_name','author2_inst','journal_name', 'pub_year', 'category'
+    print("filter : ",filtered_df.columns)
+    desired_column_order = ['id', 'article_id', 'title_ko', 'author_name', 'author_id','author_inst','author2_id','author2_name','author2_inst','journal_name', 'pub_year', 'category','keys'
                             ,'citation', 'abstract_ko', 'Similarity_AVG']
+    filtered_df['Similarity_AVG'] = filtered_df['Similarity_AVG'].round(2)
     filtered_df = filtered_df[desired_column_order]
+    filtered_df['origin_check'] = 0
+
+    filtered_df['origin_check'] = filtered_df['article_id'].apply(lambda x: search_list.index(x) + 1 if x in search_list else 0)
+
 
     return filtered_df
 
@@ -193,13 +201,14 @@ def filtering_au_data(df, subgraph_nodes):
     filtered_df.reset_index(inplace=True, drop=True)
     filtered_df['id'] = range(0, len(filtered_df))
     print(filtered_df.columns)
-    desired_column_order = ['id', 'authorID', 'author1Name', 'author1Inst', 'articleIDs', 'with_author2IDs', 'citations', 'journalIDs','pubYears','category', 'word_cloud', 'kiiscArticles','totalArticles','impactfactor','H_index' ]
+    desired_column_order = ['id', 'authorID', 'author1Name', 'author1Inst', 'articleIDs', 'titleKor','with_author2IDs', 'citations', 'journalIDs','pubYears','category', 'word_cloud', 'kiiscArticles','totalArticles','impactfactor','H_index' ]
     filtered_df = filtered_df.rename(columns={
         'id': 'id',
         'authorID': 'authorID',
         'author1Name': 'author1Name',
         'author1Inst': 'author1Inst',
         'articleIDs': 'articleIDs',
+        'titleKor' : 'titleKor',
         'with_author2IDs': 'with_author2IDs',
         'citations': 'citations',
         'journalIDs': 'journalIDs',
