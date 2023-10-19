@@ -63,3 +63,5 @@ tasks.named('test') {
 jar {
 	enabled = false
 }
+
+//cicd 확인
