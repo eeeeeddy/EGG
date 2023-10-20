@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequestMapping("/api/save")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://3.37.110.13:3000"}) // CORS 설정
 public class SaveController {
     @Autowired
     private SaveService saveService;
