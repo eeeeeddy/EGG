@@ -3,15 +3,15 @@ name: Deploy to Amazon EC2
 on:
   push:
     branches:
-      - main
+      - master
 
 # 본인이 설정한 값을 여기서 채워넣습니다.
 # 리전, 버킷 이름, CodeDeploy 앱 이름, CodeDeploy 배포 그룹 이름
 env:
   AWS_REGION: ap-northeast-2c
-  S3_BUCKET_NAME: spring-github-action-s3-bucket
-  CODE_DEPLOY_APPLICATION_NAME: Spring
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ditto
+  S3_BUCKET_NAME: ditto-github-actions-s3-bucket
+  CODE_DEPLOY_APPLICATION_NAME: ditto-codedeploy-app
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ditto-codedeploy-deployment-group
 
 permissions:
   contents: read
