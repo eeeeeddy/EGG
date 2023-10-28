@@ -9,6 +9,7 @@ from tqdm import tqdm
 import datetime
 from pymongo import MongoClient
 import pandas as pd
+import calendar
 
 client = MongoClient('mongodb://ditto:AbBaDittos!230910*@localhost', 27017)
 
@@ -176,30 +177,57 @@ def split_data(df):
 
     return df_train, df_val, df_test
 
-
-def get_arXiv_data():
+def get_arXiv_data(col_name):
     # 월 데이터 모아와서 합치기
     current_datetime = datetime.datetime.now()
     year = current_datetime.year
     month = current_datetime.month
-    col_name = "category_{:02d}{:02d}".format(year % 100, month)
-
-    print('Get ',col_name)
+    #col_name = "category_{:02d}{:02d}".format(year % 100, month)
+    #print('Get ',col_name)
     kci_db_name = "category"
     kci_db = client[kci_db_name]
     kci_data = list(kci_db[col_name].find({}))
-    df = pd.DataFrame(kci_data)
-    df.rename(columns={'titleEng': 'Title', 'abstractEng': 'Abstract'}, inplace=True)
 
-    # Title과 Abstract를 합침
-    df['Title'] = df['Title'] + df['Abstract']
-    df = df[df['label'] != 'AI']
-    # Title이 문자열인 행만 유지
-    df = df[df['Title'].apply(lambda x: isinstance(x, str))]
-    return df
-    
-df = get_arXiv_data()
+    if kci_data:
+        print('True')
+        df = pd.DataFrame(kci_data)
+        df.rename(columns={'titleEng': 'Title', 'abstractEng': 'Abstract'}, inplace=True)
+
+         # Title과 Abstract를 합침
+        df['Title'] = df['Title'] + df['Abstract']
+        df = df[df['label'] != 'AI']
+         # Title이 문자열인 행만 유지
+        df = df[df['Title'].apply(lambda x: isinstance(x, str))]
+        return df
+    else:
+        df = pd.DataFrame()
+        return df
+
+
+current_datetime = datetime.datetime.now()
+year = current_datetime.year
+month = current_datetime.month
+
+last_day = calendar.monthrange(year, month)[1]
+
+df = pd.DataFrame()
+
+# combined_df는 모든 데
+for day in range(1, last_day + 1):
+    col_name = "category_{:02d}{:02d}{:02d}".format(year % 100, month, day)
+    temp = get_arXiv_data(col_name)
+    if not temp.empty:  # temp가 빈 데이터 프레임이 아닌 경우에만 합칩니다.
+        df = pd.concat([df, temp], ignore_index=True)
+
+
+combined_df.head()
 
 df_train, df_val, df_test = split_data(df)
 print(len(df_train), len(df_val), len(df_test))
 
+EPOCHS = 5
+pretrained_model = DistilBertClassifier()
+pretrained_model.load_state_dict(torch.load("Ditto/Egg/Model/Trained_Model/train_model.pt"))
+LR = 1e-6
+train(pretrained_model, df_train, df_val, LR, EPOCHS)
+torch.save(model.state_dict(), 'Ditto/Egg/Model/Trained_Model/DistilBert_model.pt')
