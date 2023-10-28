@@ -75,3 +75,18 @@
 **Step 7:** Extract Node, Edge data and Transfer Client 
 
 
+
+# PipeLine [Airflow]
+
+** Preprocessing **
+Cycle : 1 Month
+
+![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/a80d90fb-2d7a-4920-b83e-b553602c6a9f)
+
+
+** Model Training **
+Crawling Cycle : 1 day
+Model Train Cycle : 1 Month
+
+![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/a9537180-b761-4531-8869-30172e6d0d2f)
+
