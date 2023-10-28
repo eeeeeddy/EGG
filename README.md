@@ -8,11 +8,12 @@
 <img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
 <img src="https://img.shields.io/badge/selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white">  
 
-  
+//서버  
 <img src="https://img.shields.io/badge/OpenJDK-437291?style=for-the-badge&logo=OepnJDK&logoColor=white">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">  
 <img src="https://img.shields.io/badge/D3.js-F9A03C?style=for-the-badge&logo=D3.js&logoColor=white">  
 <img src="https://img.shields.io/badge/Spring boot-6DB33F?style=for-the-badge&logo=Spring boot&logoColor=white">
+<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white">
 
 
 <img src="https://img.shields.io/badge/KciAPI-3B00B9?style=for-the-badge&logo=KciAPI&logoColor=white">
