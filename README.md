@@ -43,23 +43,33 @@
 <img width="500" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
 </div>
 
-
 # Flow
 
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/8a6ad6f1-cb8f-4c76-a4b2-0ba6f3a1717d)
 
 # CC_Graph Generate Method
-step 1: Classification , Keyword Extract, Embedding Transform 
+**Step 1:** Classification, Keyword Extraction, Embedding Transformation 
+
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/297b0349-e2ff-4f6c-b65a-ec264a4a933f)
-step 2: Make Reference Map
+
+**Step 2:** Create a Reference Map 
+
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/dfc6eb32-f767-4c4e-867e-d4833731aee4)
-step 3: Add a linking column to the Step 1 data using the Reference Map DataFrame
+
+**Step 3:** Add a linking column to the Step 1 data using the Reference Map DataFrame 
+
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/0a1accd7-6bea-4c71-b4f9-f3274cabf202)
-step 4: Generate Total Graph using networkX
-<img width="260" alt="image" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/7939c414-3ef0-4001-b72a-dbac7b3edb51">
-step 5: Extract subgraph when user's input [Select one paper]
+
+**Step 4:** Generate the Total Graph using networkX 
+
+![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/7939c414-3ef0-4001-b72a-dbac7b3edb51)
+
+**Step 5:** Extract a subgraph when the user selects one paper 
+
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/7df8c8f8-a13f-4a16-83be-987428b6ed55)
-step 6: Extract subgraph when user's input [Select more than two paper]
+
+**Step 6:** Extract a subgraph when the user selects more than two papers 
+
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/3eaab726-32d8-461f-9b2c-c88566ffb6b4)
 
 
