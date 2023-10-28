@@ -43,7 +43,7 @@
 <img width="500" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
 </div>
 
-# Flow
+# Data Flow
 
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/8a6ad6f1-cb8f-4c76-a4b2-0ba6f3a1717d)
 
