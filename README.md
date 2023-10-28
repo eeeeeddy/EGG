@@ -3,6 +3,8 @@
 ##### Front-End : https://github.com/seongcheollee/Final_Frontend 
 ##### Back-End : https://github.com/seongcheollee/Final_Backend
   
+핵심 페이지 추가
+
 
 ### 기술 스택
 <div>
@@ -31,3 +33,7 @@
 <img src="https://img.shields.io/badge/apacheairflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white">
 
 </div>
+
+
+
+
