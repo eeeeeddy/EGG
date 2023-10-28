@@ -49,7 +49,6 @@
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/8a6ad6f1-cb8f-4c76-a4b2-0ba6f3a1717d)
 
 # Graph Generate Method
-<div>
 step 1: Classification , Keyword Extract, Embedding Transform 
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/297b0349-e2ff-4f6c-b65a-ec264a4a933f)
 step 2: Make Reference Map
@@ -58,10 +57,7 @@ step 3: Add a linking column to the Step 1 data using the Reference Map DataFram
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/0a1accd7-6bea-4c71-b4f9-f3274cabf202)
 
   
-</div>
 
-
-=
 
 
 
