@@ -34,7 +34,7 @@
 
 </div>
 
-<img width="1146" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
+<img width="800" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
 
 
 
