@@ -6,7 +6,7 @@
 핵심 페이지 추가
 
 
-### 기술 스택
+### Stack
 <div>
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white">  
@@ -33,6 +33,30 @@
 <img src="https://img.shields.io/badge/apacheairflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white">
 
 </div>
+
+<img width="1146" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
+
+
+
+# Graph Generate Method
+<div>
+step 1: 
+
+  
+</div>
+
+
+# Model Train
+
+
+
+# ETL
+
+
+
+
+
+
 
 
 
