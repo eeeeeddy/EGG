@@ -3,10 +3,10 @@
 ##### Front-End : https://github.com/seongcheollee/Final_Frontend 
 ##### Back-End : https://github.com/seongcheollee/Final_Backend
   
-핵심 페이지 추가
+!! 핵심페이지 추가
 
 
-### Stack
+### technology Stack
 <div>
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white">  
