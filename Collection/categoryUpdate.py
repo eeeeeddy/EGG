@@ -10,10 +10,11 @@ import time
 from datetime import datetime
 import pandas as pd
 from pymongo import MongoClient
-
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("preprocessingSpark").getOrCreate()
 # define category titles
 category_mappings = {
-    "cs.AI": "AI",
+#    "cs.AI": "AI",
     "cs.CC": "Computation",
     "cs.CE": "Computation",
     "cs.CV": "Computer Vision",
@@ -34,7 +35,7 @@ category_mappings = {
 }
 
 queryList = [
-            "cs.AI", 
+#           "cs.AI", 
              "cs.DB", "cs.CV", "cs.CR"
              "cs.CC", "cs.CE", 
             "cs.DS", "cs.DM",
@@ -106,6 +107,7 @@ for count in range(0, 101, 100):
             if not filteredCat:
                 continue
             else:
+                data = {}
                 for i in range(len(filteredCat)):
                     if filteredCat[i] in queryList:
                         cat = filteredCat[i]
@@ -127,7 +129,7 @@ driver.quit()
 # DataFrame 생성 및 저장
 df = pd.DataFrame(data_list)
 fileName = currentDate.strftime("category_%y%m")  
-df.to_csv(f'{fileName}.csv', index=False, encoding='utf-8')
+#df.to_csv(f'{fileName}.csv', index=False, encoding='utf-8')
 print(f'Data saved to {fileName}.csv')
 
 # 몽고디비 전송

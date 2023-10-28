@@ -1,14 +1,14 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
-from pyspark.sql.functions import explode_outer,explode, col, when, size,concat,array, first, flatten
-from pyspark.sql.functions import udf, explode, collect_list, size, expr, struct, col, when, array_contains
+from pyspark.sql.functions import explode_outer,explode, col, when, size,concat,array, first,arrays_zip
+from pyspark.sql.functions import udf, explode, collect_list, size, expr, struct, col, when, array_contains, flatten
 from pyspark.sql.types import StringType, ArrayType, StructType, StructField, DoubleType
 import numpy as np
 import pandas as pd
 import ast
+import networkx as nx
 from pymongo import MongoClient
 import datetime
-import networkx as nx
 
 # SparkSession을 생성
 spark = SparkSession.builder.appName("PreprocessingSpark").getOrCreate()
@@ -40,15 +40,14 @@ parse_ems_udf = udf(parse_ems, ArrayType(DoubleType()))
 
 
 def get_kci_data(df_name):
-    
     print('Get',df_name,"!")
     kci_db_name = "kci_trained_api"
     kci_db = client[kci_db_name]
     kci_data = list(kci_db[df_name].find({}))
-
-
+    
     pandas_df = pd.DataFrame(kci_data)
-    pandas_df = pandas_df[['articleID','journalID','journalName','issn','citations','pubYear','author1ID','author1Name','author1Inst','author2IDs','author2Names','author2Insts', 'keywords', 'ems']]
+    print(pandas_df.columns)
+    pandas_df = pandas_df[['articleID','titleKor','journalID','journalName','issn','citations','pubYear','author1ID','author1Name','author1Inst','author2IDs','author2Names','author2Insts', 'class','keywords', 'ems']]
 
     pandas_df = pandas_df.astype(str)
 
@@ -61,6 +60,21 @@ def get_kci_data(df_name):
 
     return spark_df
 
+
+def get_kci_auInfo_data(df_name):
+    print('Get',df_name,"!")
+    kci_db_name = "kci_author_info"
+    kci_db = client[kci_db_name]
+    kci_data = list(kci_db[df_name].find({}))
+
+    pandas_df = pd.DataFrame(kci_data)
+    print(pandas_df.columns)
+    pandas_df = pandas_df[['authorID', 'kiiscArticles','totalArticles', 'if', 'H-index']]
+    pandas_df = pandas_df.astype(str)
+    spark_df = spark.createDataFrame(pandas_df)
+
+    return spark_df
+
 def merge_df(origin_df , new_df):
     print("Merge!")
     union_df = origin_df.union(new_df)
@@ -68,12 +82,18 @@ def merge_df(origin_df , new_df):
 
 def exploded_df(df):
     print('Exploded!')
-    exploded_df = df.withColumn("author2ID", explode_outer("author2IDs")) \
-                    .withColumn("author2Name", explode_outer("author2Names")) \
-                    .withColumn("author2Inst", explode_outer("author2Insts"))
-                
+    exploded_df = df.withColumn("temp", explode_outer(arrays_zip("author2IDs", "author2Names", "author2Insts"))) \
+        .drop("author2IDs", "author2Names", "author2Insts") \
+        .selectExpr("*", "temp.*") \
+        .withColumnRenamed("author2IDs", "author2ID") \
+        .withColumnRenamed("author2Names", "author2Name") \
+        .withColumnRenamed("author2Insts", "author2Inst") \
+        .drop("temp")
+        
+    print(exploded_df.columns)
     result_df = exploded_df.select(
         "articleID",
+        "titleKor",
         "journalID",
         "journalName",
         "issn",
@@ -82,13 +102,14 @@ def exploded_df(df):
         "author1ID",
         "author1Name",
         "author1Inst",
-        col("author2ID"),
-        col("author2Name"),
-        col("author2Inst"),
+        "author2ID",
+        "author2Name",
+        "author2Inst",
+        'class',
         'keywords',
-        col('ems')
+        'ems'
         )
-    result_df = result_df.dropDuplicates(["articleID", "author1ID", "author2ID"])
+#    result_df = result_df.dropDuplicates(["articleID", "author1ID","author1Name", "author2ID","author2Name"])
     return result_df
 
 
@@ -107,10 +128,12 @@ def joined_df(df):
         "author1ID",
         "author2ID",
         "articleID",
+        "titleKor",
         "journalID",
         "journalName",
         "pubYear",
         "citations",
+        "class",
         "keywords",
         "ems"
     )
@@ -122,19 +145,33 @@ def grouping(df):
     print("Grouping")
     grouped_df = df.groupBy("authorID", "author1Name","author1Inst").agg(
         collect_list("articleID").alias("articleIDs"),
+        collect_list("titleKor").alias("titleKor"),
         collect_list("author2ID").alias("with_author2IDs"),
         collect_list("author1ID").alias("with_author1IDs"),
         collect_list("citations").alias("citations"),
         collect_list("journalID").alias("journalIDs"),
         collect_list("pubYear").alias("pubYears"),
-        first("keywords").alias("word_cloud"),
+        collect_list("class").alias("class"),
+        collect_list("keywords").alias("word_cloud"),
         first("ems").alias("ems")
 
     )
     grouped_df = grouped_df.withColumn("with_author1IDs", array())
-    return grouped_df
+    grouped_df = grouped_df.withColumn("word_cloud", flatten(grouped_df["word_cloud"]))
 
+    return grouped_df
     
+
+def join_author_info(grouped_df, author_info_df):
+    joined_df = grouped_df.join(author_info_df, on="authorID", how="left")
+    drop_column = ['authorName','authorInst']
+    joined_df = joined_df.drop(*drop_column)
+    joined_df = joined_df.withColumnRenamed("if", "impactfactor")
+    joined_df = joined_df.withColumnRenamed("H-index", "H_index")
+    joined_df = joined_df.withColumnRenamed("class", "category")
+    return joined_df
+
+
 def save_final_kci_data(final_df):
     final = final_df.toPandas()
     output_col_name = "kci_AuGraph_{:04d}{:02d}".format(year, month)
@@ -147,7 +184,6 @@ def save_final_kci_data(final_df):
 
 def generate_and_save_graph(df):
     print("Generate AuGraph")
-
     G = nx.Graph()
 
     # 저자 아이디 노드 추가
@@ -169,12 +205,15 @@ def generate_and_save_graph(df):
 
 previous_col_name = "kci_trained_{:04d}{:02d}".format(year, one_month_ago)
 current_col_name = "kci_trained_{:04d}{:02d}".format(year, month)
+previous_col_name_author_info = "author_{:04d}{:02d}".format(year, month)
 
 origin_df = get_kci_data(previous_col_name)
 new_df = get_kci_data(current_col_name)
+author_df = get_kci_auInfo_data(previous_col_name_author_info)
 merged_df = merge_df(origin_df, new_df)
 exploded_df = exploded_df(merged_df)
 joined_df = joined_df(exploded_df)
 grouped_df = grouping(joined_df)
-save_final_kci_data(grouped_df)
-generate_and_save_graph(grouped_df)
+final_df = join_author_info(grouped_df, author_df)
+#save_final_kci_data(final_df)
+#generate_and_save_graph(grouped_df)

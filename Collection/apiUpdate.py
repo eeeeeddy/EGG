@@ -1,5 +1,3 @@
-%spark.pyspark
-
 # 0. 필요 라이브러리 호출
 import requests
 import urllib.parse
@@ -389,19 +387,19 @@ def sendTomongo(newBack, detail, newKci, refDF):
     backDB = client.get_database('back')
     backClient = backDB.get_collection(back_file) #back_name
     newBack = newBack.to_dict('records')
-    backClient.insert_many(newBack)
+    #backClient.insert_many(newBack)
 
     # ref 데이터
     backClient = backDB.get_collection(ref_file) #back_name
     refDF = refDF.to_dict('records')
-    backClient.insert_many(refDF)
+    #backClient.insert_many(refDF)
 
     # kci 데이터
     kciDB = client.get_database('kci_api')
     kciClient = kciDB.get_collection(kci_file) #kci_name
     newKci = newKci.to_dict('records')
-    kciClient.insert_many(newKci)
-
+    #kciClient.insert_many(newKci)
+    print(newKci[0])
     # testDB = client.get_database('test')
     # testClient = testDB.get_collection(back_file) #back_name
     # newBack = newBack.to_dict('records')

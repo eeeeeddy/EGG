@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 # 세션 생성 및 디비 연동
-spark = SparkSession.builder.appName("preprocessingSpakr").getOrCreate()
+spark = SparkSession.builder.appName("preprocessingSpark").getOrCreate()
 client = MongoClient('mongodb://ditto:AbBaDittos!230910*@localhost', 27017)
 
 pd.DataFrame.iteritems = pd.DataFrame.items
@@ -49,7 +49,8 @@ def get_reference_map_data():
     print('Get Reference Map!')
 
     reference_map_db = client['reference_map'] 
-    previous_refer_col_name = "reference_map_{:04d}{:02d}".format(year, month)
+    previous_refer_col_name = "reference_map_{:04d}{:02d}".format(year, one_month_ago)
+
     reference_map = list(reference_map_db[previous_refer_col_name].find({}))
     # dataFrame 변환
     reference_map_df = pd.DataFrame(reference_map)
@@ -79,7 +80,7 @@ def renew_reference_map_data(ndf, reference_map_df):
     db = client.get_database('reference_map')
     cl = db.get_collection(output_refer_col_name)
     refer_final = refer_final.to_dict('records')
-    cl.insert_many(refer_final)
+    #cl.insert_many(refer_final)
 
     return result_df
     
@@ -158,13 +159,13 @@ def generate_and_save_graph(df):
 
 previous_col_name = "kci_trained_{:04d}{:02d}".format(year, one_month_ago)
 current_col_name = "kci_trained_{:04d}{:02d}".format(year, month)
+
+
 origin_df = get_kci_data(previous_col_name)
 new_df = get_kci_data(current_col_name)
-
-
 refer_df = get_reference_map_data()
 renew_df = renew_reference_map_data(new_df, refer_df)
 merged_df = merge_origin_new_df(origin_df, new_df, refer_df)
 result_df = process_grouped_dataframe(merged_df)
-save_final_kci_data(result_df)
-generate_and_save_graph(result_df)
+#save_final_kci_data(result_df)
+#generate_and_save_graph(result_df)

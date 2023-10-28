@@ -7,7 +7,8 @@ import pandas as pd
 from keybert import KeyBERT
 from pymongo import MongoClient
 from tqdm import tqdm
-
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("preprocessingSpark").getOrCreate()
 
 class DistilBertClassifier(nn.Module):
     def __init__(self, dropout=0.5):
@@ -166,7 +167,7 @@ def save_df(df):
     
 
 model = DistilBertClassifier()
-model.load_state_dict(torch.load('train_model.pt',map_location='cpu'))
+model.load_state_dict(torch.load('/home/ubuntu/Ditto/Egg/Model/train_model.pt',map_location='cpu'))
 Kmodel = KeyBERT(model)
 
 client = MongoClient('mongodb://ditto:AbBaDittos!230910*@localhost', 27017)
@@ -175,4 +176,4 @@ df = import_dataframe()
 cdf = categori_classifier(df)
 kdf = extract_keywords_for_df(cdf)
 edf = extract_embedding_for_df(kdf)
-save_df(edf)
+#save_df(edf)
