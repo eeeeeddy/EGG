@@ -78,14 +78,14 @@
 
 # PipeLine [Airflow]
 
-** Preprocessing **
+**APi Collection and Preprocessing**
 
 Cycle : 1 Month
 
 ![image](https://github.com/seongcheollee/EGG_Data/assets/59824783/a80d90fb-2d7a-4920-b83e-b553602c6a9f)
 
 
-** Model Training **
+**Model Training**
 
 Crawling Cycle : 1 day
 
