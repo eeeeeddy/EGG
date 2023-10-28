@@ -1,7 +1,7 @@
 # 네트워크 그래프를 통한 논문 탐색 사이트 [Data]
 <div>
-  Front-End : https://github.com/seongcheollee/Final_Frontend
-  Back-End : https://github.com/seongcheollee/Final_Backend
+  ##### Front-End : https://github.com/seongcheollee/Final_Frontend 
+  ##### Back-End : https://github.com/seongcheollee/Final_Backend
   
 </div>
 
