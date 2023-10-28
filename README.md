@@ -34,11 +34,15 @@
 
 </div>
 
-#### environment configuration
+### environment configuration
 
 <div>
 <img width="500" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
 </div>
+
+### System Architecture
+<img width="669" alt="systemArich" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/99f3a64a-bfbf-4f5b-827f-cbb8905c4431">
+
 
 
 # Graph Generate Method
