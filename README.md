@@ -33,10 +33,9 @@
 <img src="https://img.shields.io/badge/apacheairflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white">
 
 </div>
+#### environment configuration
 <div>
-  
 <img width="500" alt="ec2" src="https://github.com/seongcheollee/EGG_Data/assets/59824783/e95dc848-d2c0-416d-b666-e3aee32c8738">
-
 </div>
 
 
