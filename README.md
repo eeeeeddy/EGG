@@ -25,13 +25,6 @@
 
 ### 3. API
 
-| POST | Request | Return |
-|------|---------|--------|
-|      |         |        |
-|      |         |        |
-|      |         |        |
-
-
 - **users-controller** <br>
 
   | POST                  | Request                                  | Return  |
