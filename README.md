@@ -113,8 +113,8 @@
             - Save 페이지
               - 사용자가 저장한 논문 저장
                 
-## 회원 기능
-**SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능**
+## ▫️ 회원 기능
+SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능
 
 ### 정의
 <details>
