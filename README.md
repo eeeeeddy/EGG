@@ -32,10 +32,13 @@
 <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
 </div>
 
+---
+
 ## DataBase 
 
 추후 ERD 추가 예정
 
+---
 ## API
 
 - **users-controller** <br>
@@ -85,7 +88,7 @@
   | GET                      | Request | Return           |
   |--------------------------|---------|------------------|
   | /api/v1/users/checkEmail | email   | 중복 이메일에 대한 검증 결과 |
-
+---
 ## Function
 
 - **DB 설계**
@@ -110,26 +113,26 @@
             - Save 페이지
               - 사용자가 저장한 논문 저장
                 
-### 회원 기능
+## 회원 기능
 **SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능**
 
-#### 정의
+### 정의
 <details>
 <summary>토큰 기반 인증 시스템</summary>
 
-웹 보안은 요청하는 사용자를 식별하는 인증(Authenticate)와 인증된 사용자가 보호된 리소스에 접근할 권한이 있는지 확인하는 인가(Authorize)가 바탕이 된다.
+- 웹 보안은 요청하는 사용자를 식별하는 인증(Authenticate)와 인증된 사용자가 보호된 리소스에 접근할 권한이 있는지 확인하는 인가(Authorize)가 바탕이 된다.
 
-Token기반 인증 시스템은 인증을 받은 사용자에게 토큰을 전달하고, 사용자가 서버에 요청할 때 Header에 발급 받은 토큰을 함께 보내어 유효성을 검사한다.</br> 
+- Token기반 인증 시스템은 인증을 받은 사용자에게 토큰을 전달하고, 사용자가 서버에 요청할 때 Header에 발급 받은 토큰을 함께 보내어 유효성을 검사한다.</br> 
 *** stateless구조를 갖는다.**
 
-따라서 클라이언트가 요청했을 때 클라이언트의 Header에 담긴 Toekn만으로 인증 정보를 확인할 수 있기에 세션 관리를 요하지 않아 자원을 아낄 수 있다.
+- 따라서 클라이언트가 요청했을 때 클라이언트의 Header에 담긴 Toekn만으로 인증 정보를 확인할 수 있기에 세션 관리를 요하지 않아 자원을 아낄 수 있다.
 </details>
 <details>
 <summary>JWT란 (Json Web Token)</summary>
 
-JSON 객체를 사용해서 토큰 자체에 정보를 저장하는 Web Token이다.
+- JSON 객체를 사용해서 토큰 자체에 정보를 저장하는 Web Token이다.
 
-JWT는 Header, Payload, Signature 3 개의 부분으로 구성되어 있으며 쿠키나 세션을 이용한 인증보다 안전하고 효율적이며, 웹 응용 프로그램, 모바일 애플리케이션, 마이크로서비스 및 다양한 분산 시스템에서 인증 및 권한 부여를 위한 강력한 도구로 사용되며, 사용자 관리 및 보안을 향상시키는 데 기여한다.
+- JWT는 Header, Payload, Signature 3 개의 부분으로 구성되어 있으며 쿠키나 세션을 이용한 인증보다 안전하고 효율적이며, 웹 응용 프로그램, 모바일 애플리케이션, 마이크로서비스 및 다양한 분산 시스템에서 인증 및 권한 부여를 위한 강력한 도구로 사용되며, 사용자 관리 및 보안을 향상시키는 데 기여한다.
 </details>
 
 #### 처리과정
