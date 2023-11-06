@@ -1,18 +1,18 @@
 # EGG : 논문 시각화 검색 서비스
 ---
 ## 목차
-1. [Stack](#1.stack)
-2. [DataBase](#2.database)
-3. [API](#3.api)
-4. [Function](#4.function)<br/>
-   - 4.1.[ElasticSearch 검색엔진 연동]<br/>
-       + 4.1.1</br>
-   - 4.2.[SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능](#4.3.-springsecurity+jwt+redis를-활용한-토큰-기반-사용자-기능)<br/>
+- [Stack](#stack)</br>
+- [DataBase](#database)</br>
+- [API](#api)</br>
+- [Function](#function)<br/>
+   + 1.[ElasticSearch 검색엔진 연동]<br/>
+       + 1.1</br>
+   + 2.[SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능](#4.3.-springsecurity+jwt+redis를-활용한-토큰-기반-사용자-기능)<br/>
        + 4.2.1.[정의](#4.2.1.정의)<br/> 
        + 4.2.2.[처리 과정](#4.2.2.처리과정)<br/> 
-   - 4.3.[CI/CD 구성]<br/>   
+   + 3.[CI/CD 구성]<br/>   
 ---
-## 1. Stack
+## Stack
 
 <div align=center>
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
@@ -31,11 +31,11 @@
 <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
 </div>
 
-## 2. DataBase 
+## 2.DataBase 
 
 추후 ERD 추가 예정
 
-## 3. API
+## 3.API
 
 - **users-controller** <br>
 
@@ -85,7 +85,7 @@
   |--------------------------|---------|------------------|
   | /api/v1/users/checkEmail | email   | 중복 이메일에 대한 검증 결과 |
 
-## 4. Function
+## 4.Function
 
 - **DB 설계**
   - 공동 작업 (이승윤, 장수현)
@@ -108,7 +108,7 @@
               - 사용자가 열어 본 논문 기록 저장
             - Save 페이지
               - 사용자가 저장한 논문 저장
----
+                
 ## 4.2. SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능
 
 ### 4.2.1.정의
@@ -129,7 +129,7 @@ JSON 객체를 사용해서 토큰 자체에 정보를 저장하는 Web Token이
 
 JWT는 Header, Payload, Signature 3 개의 부분으로 구성되어 있으며 쿠키나 세션을 이용한 인증보다 안전하고 효율적이며, 웹 응용 프로그램, 모바일 애플리케이션, 마이크로서비스 및 다양한 분산 시스템에서 인증 및 권한 부여를 위한 강력한 도구로 사용되며, 사용자 관리 및 보안을 향상시키는 데 기여한다.
 </details>
-### 4.2.2.처리과정
 
+### 4.2.2.처리과정
 ![Untitled](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%2050357ac18f4f4d5b83d6ce9dd71229ed/Untitled.png)
 
