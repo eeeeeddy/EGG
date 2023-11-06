@@ -136,5 +136,6 @@
 </details>
 
 #### 처리과정
-![Untitled](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%2050357ac18f4f4d5b83d6ce9dd71229ed/Untitled.png)
+![jwt처리과정](./image/jwt처리과정.png)
+
 
