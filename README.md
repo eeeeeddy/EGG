@@ -1,16 +1,16 @@
 # EGG : 논문 시각화 검색 서비스
 ---
 ## 목차
-- 1. [Stack](#1.-stack)
-- 2. [DataBase](#2.-database)
-- 3. [API](#3.-api)
-- 4. [Function](#4.-function)<br/>
-   + 4.1.[ElasticSearch 검색엔진 연동]<br/>
-       - 4.1.1</br>
-   + 4.2.[SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능](#4.3.-springsecurity+jwt+redis를-활용한-토큰-기반-사용자-기능)<br/>
-       - 4.2.1.[정의](#4.2.1.정의)<br/> 
-       - 4.2.2.[처리 과정](#4.2.2.처리과정)<br/> 
-   + 4.3.[CI/CD 구성]<br/>   
+1. [Stack](#1.stack)
+2. [DataBase](#2.database)
+3. [API](#3.api)
+4. [Function](#4.function)<br/>
+   - 4.1.[ElasticSearch 검색엔진 연동]<br/>
+       + 4.1.1</br>
+   - 4.2.[SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능](#4.3.-springsecurity+jwt+redis를-활용한-토큰-기반-사용자-기능)<br/>
+       + 4.2.1.[정의](#4.2.1.정의)<br/> 
+       + 4.2.2.[처리 과정](#4.2.2.처리과정)<br/> 
+   - 4.3.[CI/CD 구성]<br/>   
 ---
 ## 1. Stack
 
@@ -99,7 +99,7 @@
             - AWS EC2 배포
 - **장수현**
     - **기능**
-        - [회원 기능](#4.3.-springsecurity+jwt+redis를-활용한-토큰-기반-사용자-기능)
+        - 회원 기능
             - 회원 가입 유효성 및 중복성 검사
             - 로그인 유효성 및 중복성 검사
             - JWT를 이용한 사용자 검증 토큰 발행
