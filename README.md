@@ -140,6 +140,6 @@ SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능
 Security + JWT + Redis 기본 동작 원리
    
 ![jwt처리과정](./image/jwt처리과정.png)
-
+*Login ID/PW 를 기반으로 Authentication 객체 생성*
 
 </details>
