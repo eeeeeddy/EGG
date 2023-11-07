@@ -138,7 +138,7 @@ SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능
 #### 처리과정
 <details>
 <summary>Security + JWT + Redis 기본 동작 원리</summary>
-![jwt처리과정](https://github.com/eeeeeddy/Final_Backend/blob/b85a44005aa283d9da5f2741f891e9bf61a8f3a3/image/jwt%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A5%E1%86%BC.png)
+![jwt처리과정](./image/jwt처리과정.png)
 
 
 </details>
