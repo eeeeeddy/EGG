@@ -1,6 +1,10 @@
 # Egg_Graph_FastAPI
 
 
+
+<h1>Flow</h1>
+<img width="1417" alt="image" src="https://github.com/seongcheollee/Egg_Graph_FastAPI/assets/59824783/31018016-6a37-4bbd-aab6-57641293fe1c">
+
 <h1>API</h1>
 
 
