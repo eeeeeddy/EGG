@@ -12,4 +12,5 @@
 
 <img width="1406" alt="image" src="https://github.com/seongcheollee/Egg_Graph_FastAPI/assets/59824783/621bda7a-bec8-40d0-8868-60ef3f3fae2c">
 
-![Uploading image.png…]()
+<img width="1382" alt="image" src="https://github.com/seongcheollee/Egg_Graph_FastAPI/assets/59824783/a21a7bbb-6a04-4f20-b2fa-833e87682d04">
+
