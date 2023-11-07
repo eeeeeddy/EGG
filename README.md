@@ -36,7 +36,7 @@
 
 ## DataBase 
 
-추후 ERD 추가 예정
+![ERD](./image/EggERD.png)
 
 ---
 ## API
