@@ -2,9 +2,8 @@
 
 ##### Front-End : https://github.com/seongcheollee/Final_Frontend 
 ##### Back-End : https://github.com/seongcheollee/Final_Backend
-  
-!! 핵심페이지 추가
-
+##### Back-End(Fastapi) : https://github.com/seongcheollee/Egg_Graph_FastAPI
+##### Convert Docker : https://github.com/seongcheollee/spark-yarn-docker
 
 ### technology Stack
 <div>
