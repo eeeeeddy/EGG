@@ -104,7 +104,7 @@
 
 - 사용자 기능
 
-    SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능 <br><br>
+    SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능 <br>
 
     <details>
     <summary> 개념</summary>
