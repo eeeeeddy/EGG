@@ -34,7 +34,7 @@
 
 ## DataBase 
 
-![ERD](./image/EggERD.png)
+![ERD](https://github.com/eeeeeddy/Final_Backend/assets/71869717/4842b410-ff7f-48df-87bf-4b18072bb77a)
 
 ---
 ## API
@@ -137,7 +137,7 @@ SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능
 
 Security + JWT + Redis 기본 동작 원리
    
-![jwt처리과정](./image/jwt처리과정.png)
+![jwt처리과정](https://github.com/eeeeeddy/Final_Backend/assets/71869717/30a5fd62-763c-495e-ab35-4cb306b8671c)
 *Login ID/PW 를 기반으로 Authentication 객체 생성*
 
 </details>
