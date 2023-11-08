@@ -1,0 +1,37 @@
+show dbs
+exit
+show dbs
+exit
+show dbs
+show use
+show user
+show dbs
+use admin
+show dbs
+use Egg
+show dbs
+exit
+show dbs
+show collections
+use mydb
+show dbs
+mydb
+show dbs
+show users
+use admin
+exit
+show dbs
+db.getUsers();
+ls
+use admin
+switch admin
+db.getUsers();
+exit
+show users
+show user
+db.getUsers()
+use admin["root"]} )
+show users
+show user
+db.getUsers()
+use admin
