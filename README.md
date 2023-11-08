@@ -125,7 +125,7 @@
     </details>
     
     <details>
-    <summary>처리과정</summary>
+    <summary>처리 과정</summary>
 
     Security + JWT + Redis 기본 동작 원리
        
