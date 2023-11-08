@@ -51,9 +51,9 @@
         - JWT를 이용한 사용자 검증 토큰 발행
         - Redis를 이용한 토큰 저장 및 재발급
 
-### 4. 데모 영상
+### 4. 시연 영상
 
-<Git에 올릴 때 영상 넣기>
+[EGG 시연 영상](https://youtu.be/PhPxPKtndbI?si=Ywp87HYqcUDCkm_X)
 
 ### 5. 기술스택
 
