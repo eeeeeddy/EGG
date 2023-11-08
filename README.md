@@ -34,7 +34,7 @@
 
 ## DataBase 
 
-![ERD](https://github.com/eeeeeddy/Final_Backend/assets/71869717/4842b410-ff7f-48df-87bf-4b18072bb77a)
+<img width="796" alt="스크린샷 2023-11-08 오후 9 24 40" src="https://github.com/eeeeeddy/Final_Backend/assets/132035053/a0372681-4feb-49f0-8b4d-2d719359c67c">
 
 ---
 ## API
