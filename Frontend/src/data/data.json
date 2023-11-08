@@ -1,0 +1,834 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "article_id": "ART001960686",
+            "title_ko": "Structural SVM 기반의 한국어 의미역 결정",
+            "author_name": "이창기",
+            "author_id": "CRT001419817",
+            "author_inst": "강원대학교",
+            "author2_id": [
+                "CRT002411740",
+                "CRT001477031"
+            ],
+            "author2_name": [
+                "임수종",
+                "김현기"
+            ],
+            "author2_inst": [
+                "한국전자통신연구원",
+                "한국전자통신연구원"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2015,
+            "citation": 8,
+            "category": "Computer Vision",
+            "keys": [
+                "semantic role labeling",
+                "Korean propbank",
+                "sequence labeling problem",
+                "structured SVM",
+                "의미역 결정",
+                "Korean Propbank",
+                "Sequence labeling 문제",
+                "Structural SVM"
+            ],
+            "abstract_ko": "의미역 결정은 자연어 문장의 서술어와 그 서술어에 속하는 논항들 사이의 의미관계를 결정하는 문제이다. 일반적으로 의미역 결정을 위해서는 서술어 인식(Predicate Identification, PI), 서술어 분류(Predicate Classification, PC), 논항 인식(Argument Identification, AI) 논항 분류(Argument Classification, AC) 단계가 수행된다. 본 논문에서는 한국어 의미역 결정 문제를 위해 Korean Propbank를 의미역 결정 학습 말뭉치로 사용하고, 의미역 결정 문제를 Sequence Labeling 문제로 바꾸어 이 문제에서 좋은 성능을 보이는 Structural SVM을 이용하였다. 실험결과 서술어 인식/분류(Predicate Identification and Classification, PIC)에서는 97.13%(F1)의 성능을 보였고, 논항 인식/분류(Argument Identification and Classification, AIC)에서는 76.96%(F1)의 성능을 보였다.",
+            "Similarity_AVG": 0.94,
+            "origin_check": 0
+        },
+        {
+            "id": 1,
+            "article_id": "ART002191227",
+            "title_ko": "Sequence-to-sequence 기반 한국어 형태소 분석 및 품사 태깅",
+            "author_name": "이건일",
+            "author_id": "CRT001727831",
+            "author_inst": "포항공과대학교",
+            "author2_id": [
+                "CRT002117213",
+                "CRT000271089"
+            ],
+            "author2_name": [
+                "이의현",
+                "이종혁"
+            ],
+            "author2_inst": [
+                "포항공과대학교",
+                "포항공과대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2017,
+            "citation": 13,
+            "category": "ML",
+            "keys": [
+                "morphological analysis",
+                "POS Tagging",
+                "sequence-to-sequence model",
+                "형태소 분석",
+                "품사 태깅",
+                "sequence-to-sequence 모델"
+            ],
+            "abstract_ko": "기존의 전통적인 한국어 형태소 분석 및 품사 태깅 방법론은 먼저 형태소 후보들을 생성한 뒤 수많은 조합에서 최적의 확률을 가지는 품사 태깅 결과를 구하는 두 단계를 거치며 추가적으로 형태소의 접속 사전, 기분석 사전 및 원형복원 사전 등을 필요로 한다. 본 연구는 기존의 두 단계 방법론에서 벗어나 심층학습 모델의 일종인 sequence-to-sequence 모델을 이용하여 한국어 형태소 분석 및 품사 태깅을 추가 언어자원에 의존하지 않는 end-to-end 방식으로 접근하였다. 또한 형태소 분석 및 품사 태깅 과정은 어순변화가 일어나지 않는 특수한 시퀀스 변환과정이라는 점을 반영하여 음성인식분야에서 주로 사용되는 합성곱 자질을 이용하였다. 세종말뭉치에 대한 실험결과 합성곱 자질을 사용하지 않을 경우 97.15%의 형태소 단위 f1-score, 95.33%의 어절단위 정확도, 60.62%의 문장단위 정확도를 보여주었고, 합성곱 자질을사용할 경우 96.91%의 형태소 단위 f1-score, 95.40%의 어절단위 정확도, 60.62%의 문장단위 정확도를보여주었다.",
+            "Similarity_AVG": 1.0,
+            "origin_check": 1
+        },
+        {
+            "id": 2,
+            "article_id": "ART002577490",
+            "title_ko": "부분단어와 품사 태깅 정보를 활용한 형태소 기반의 한국어 단어 벡터 생성",
+            "author_name": "윤준영",
+            "author_id": "CRT002407887",
+            "author_inst": "충북대학교",
+            "author2_id": [
+                "CRT000346253"
+            ],
+            "author2_name": [
+                "이재성"
+            ],
+            "author2_inst": [
+                "충북대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2020,
+            "citation": 1,
+            "category": "ML",
+            "keys": [
+                "word vector",
+                "subword",
+                "morpheme vector",
+                "part of speech",
+                "pre-training",
+                "단어 벡터",
+                "부분단어",
+                "형태소 벡터",
+                "품사 태그",
+                "사전학습"
+            ],
+            "abstract_ko": "단어 벡터는 단어 사이의 관계를 벡터 연산으로 가능하게 할 뿐 아니라, 상위의 신경망 프로그램의 사전학습 데이터로 많이 활용되고 있다. 영어 등의 언어와는 달리, 한국어는 어절, 형태소, 음절 및 자소 등으로 다양하게 분리할 수 있는 특성 때문에 영어 학습 모델들과는 다른 다양한 단어 벡터 학습 모델들이 연구되어 왔다. 본 연구에서는 한국어 단어 벡터를 학습하기 위한 단위로 우선 어절을 형태소로 분해하고, 이를 음절 및 자소의 부분단어로 분해하여 학습하는 방법을 제안한다. 또한 전처리된 형태소의 의미 및 구조 정보를 활용하기 위해 품사 태그 정보(Part Of Speech)를 학습에 반영하도록 한다. 성능 검증을 위해 단어 유추 평가 및 응용 프로그램 적용 평가를 해 본 결과, 맞춤법 오류가 적은 일반적인 문서에 대해, 형태소 단위로 자소 부분단어 처리를 하고 품사 태그를 추가했을 경우 다른 방법에 비해 우수함을 보였다.",
+            "Similarity_AVG": 0.97,
+            "origin_check": 0
+        },
+        {
+            "id": 3,
+            "article_id": "ART002514031",
+            "title_ko": "딥러닝을 이용한 화합물-단백질 상호작용 예측",
+            "author_name": "서상민",
+            "author_id": "CRT002332872",
+            "author_inst": "인천대학교",
+            "author2_id": [
+                "CRT001804144"
+            ],
+            "author2_name": [
+                "안재균"
+            ],
+            "author2_inst": [
+                "인천대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2019,
+            "citation": 2,
+            "category": "ML",
+            "keys": [
+                "기계 번역",
+                "딥러닝",
+                "신약 개발",
+                "화합물-단백질 상호작용",
+                "분류분석",
+                "Machine translation",
+                "deep learning",
+                "drug development",
+                "compound-protein interaction",
+                "classification"
+            ],
+            "abstract_ko": "화합물과 단백질 간의 상호작용을 특성화하는 것은 약물 개발 및 탐색을 위해 중요한 과정이다. 상호작용을 파악하기 위해 단백질과 화합물의 구조 데이터를 이용하지만 그 구조가 알려져 있지 않은 경우도 많으며, 많은 계산 양으로 인해 예측의 속도와 정확도도 떨어질 수 있다는 한계가 있다. 본 논문에서는 기계번역에서 사용되는 sequence-to-sequence 알고리즘과 입력벡터를 효과적으로 축소시키기 위한 오토 인코더를 결합한 모델인 S2SAE (Sequence-To-Sequence Auto-Encoder)를 이용하여 화합물-단백질 상호작용을 예측하였다. 본 논문에서 제안한 방법은 기존의 복합체를 나타내는 표현들보다 적은 수의 특징들을 이용하여 상호작용을 예측할 수 있으며, 기존의 방법보다 높은 예측 정확도를 보여주었다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 4,
+            "article_id": "ART002625059",
+            "title_ko": "BERT 기반 한국어 개방형 정보 추출",
+            "author_name": "황현선",
+            "author_id": "CRT002144440",
+            "author_inst": "강원대학교 컴퓨터과학과",
+            "author2_id": [
+                "CRT001419817"
+            ],
+            "author2_name": [
+                "이창기"
+            ],
+            "author2_inst": [
+                "강원대학교"
+            ],
+            "journal_name": "정보과학회 컴퓨팅의 실제 논문지",
+            "pub_year": 2020,
+            "citation": 1,
+            "category": "ML",
+            "keys": [
+                "BERT",
+                "개방형 정보 추출",
+                "딥러닝",
+                "Sequence Labeling",
+                "BERT",
+                "open information extraction",
+                "deep learning",
+                "sequence labeling"
+            ],
+            "abstract_ko": "개방형 정보 추출은 자연어로 된 문장에서 구조화된 정보인 트리플을 추출하는 기술이다. 기존의 개방형 정보 추출은 입력 문장에서 관계 정보를 추출해야 하는 특성 때문에 품사 패턴, 의존 구문 분석 정보, 의미역 결정 정보 등을 이용한 복잡한 방법을 사용하였다. 본 논문에서는 한국어 개방형 정보 추출을 순차열 분류 문제로 보고 사전학습 된 BERT 모델을 적용하는 방법을 제안한다. 실험 결과 본 논문에서 제안한 모델이 정답이 아닌 자동으로 구축된 학습데이터 만을 사용했음에도 기존의 규칙기반의 방법보다 F-1 measure 2～3% 정도의 성능향상을 보였다.",
+            "Similarity_AVG": 0.96,
+            "origin_check": 0
+        },
+        {
+            "id": 5,
+            "article_id": "ART002765784",
+            "title_ko": "텍스트 바꿔 쓰기 과제를 위한 분류 모델 기반의 손실 함수 설계와 평가",
+            "author_name": "전현규",
+            "author_id": "CRT002665777",
+            "author_inst": "성균관대학교",
+            "author2_id": [
+                "CRT001812854"
+            ],
+            "author2_name": [
+                "정윤경"
+            ],
+            "author2_inst": [
+                "성균관대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2021,
+            "citation": 0,
+            "category": "ML",
+            "keys": [
+                "paraphrase generation",
+                "classification model",
+                "model-based learning",
+                "loss function",
+                "바꿔 쓰기",
+                "분류 모델",
+                "모델기반 학습",
+                "손실 함수"
+            ],
+            "abstract_ko": "바꿔 쓰기(paraphrase generation)는 입력 문장에 대하여 의미는 같지만, 단어나 통사 구조와 같은 표현이 다른 문장을 생성하는 과제이다. 최근 이를 구현하기 위해 인공 신경망 기반의 모델이 널리 사용되며, 학습 방법으로서 지도 학습이 주로 사용된다. 그러나 생성된 문장과 레이블 문장 간의 차이를 줄이는 지도 학습 방법은 모델에 제한된 의미 정보만을 제공한다. 따라서 본 논문에서는 분류 과제를 학습한 별도의 모델을 활용하여, 바꿔 쓰기 모델 학습 시 의미 정보를 추출하고 이를 활용하는 방법을 제안하고 실험하였으며, 그 결과 기존 방법과 비교하여 더 좋은 성능을 보였다.",
+            "Similarity_AVG": 0.94,
+            "origin_check": 0
+        },
+        {
+            "id": 6,
+            "article_id": "ART002089515",
+            "title_ko": "기분석사전과 기계학습 방법을 결합한 음절 단위 한국어 품사 태깅",
+            "author_name": "이충희",
+            "author_id": "CRT000984411",
+            "author_inst": "한국전자통신연구원",
+            "author2_id": [
+                "CRT001815808",
+                "CRT002411740",
+                "CRT001477031"
+            ],
+            "author2_name": [
+                "임준호",
+                "임수종",
+                "김현기"
+            ],
+            "author2_inst": [
+                "한국전자통신연구원",
+                "한국전자통신연구원",
+                "한국전자통신연구원"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2016,
+            "citation": 6,
+            "category": "ML",
+            "keys": [
+                "morphological analysis",
+                "POS tagging",
+                "machine learning",
+                "pre-analyzed dictionary",
+                "형태소 분석",
+                "품사 태깅",
+                "기계학습",
+                "기분석사전"
+            ],
+            "abstract_ko": "본 논문은 음절 단위 한국어 품사 태깅 방법의 성능 개선을 위해 기분석사전과 기계학습 방법을 결합하는 방법을 제안한다. 음절 단위 품사 태깅 방법은 형태소분석을 수행하지 않고 품사 태깅만을 수행하는 방법이며, 순차적 레이블링(Sequence Labeling) 문제로 형태소 태깅 문제를 접근한다. 본 논문에서는 순차적 레이블링 기반 음절 단위 품사 태깅 방법의 전처리 단계로 품사 태깅말뭉치와 국어사전으로부터 구축된 복합명사 기분석사전과 약 1천만 어절의 세종 품사 태깅말뭉치로부터 자동 추출된 어절 사전을 적용함으로써 품사 태깅 성능을 개선시킨다. 성능 평가를 위해서 약 74만 어절의 세종 품사 태깅말뭉치로부터 67만 어절을 학습 데이터로 사용하고 나머지 7만 4천 어절을 평가셋으로 사용하였다. 기계학습 방법만을 사용한 경우에 96.4%의 어절 정확도를 보였으며, 기분석사전을 결합한 경우에는 99.03%의 어절 정확도를 보여서 2.6%의 성능 개선을 달성하였다. 퀴즈 분야의 평가셋으로 실험한 경우에도 기계학습 엔진은 96.14% 성능을 보인 반면, 하이브리드 엔진은 97.24% 성능을 보여서 제안 방법이 다른 분야에도 효과적임을 확인하였다.",
+            "Similarity_AVG": 0.93,
+            "origin_check": 0
+        },
+        {
+            "id": 7,
+            "article_id": "ART002223951",
+            "title_ko": "포인터 네트워크를 이용한 한국어 대명사 상호참조해결",
+            "author_name": "박천음",
+            "author_id": "CRT001924005",
+            "author_inst": "강원대학교",
+            "author2_id": [
+                "CRT001419817"
+            ],
+            "author2_name": [
+                "이창기"
+            ],
+            "author2_inst": [
+                "강원대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2017,
+            "citation": 4,
+            "category": "ML",
+            "keys": [
+                "포인터 네트워크",
+                "대명사 상호참조해결",
+                "딥 러닝",
+                "상호참조해결",
+                "pointer networks",
+                "coreference resolution for pronouns",
+                "deep learning",
+                "coreference resolution"
+            ],
+            "abstract_ko": "포인터 네트워크(Pointer Networks)는 Recurrent Neural Network (RNN)를 기반으로 어텐션 메커니즘(Attention mechanism)을 이용하여 입력 시퀀스에 대응되는 위치들의 리스트를 출력하는 딥러닝 모델이다. 대명사 상호참조해결은 문서 내에 등장하는 대명사와 이에 대응되는 선행사를 찾아 하나의 엔티티로 정의하는 자연어처리 문제이다. 본 논문에서는 포인터 네트워크를 이용하여 대명사와 선행사의 참조관계를 밝히는 대명사 상호참조해결 방법과 포인터 네트워크의 입력 연결순서(chaining order) 여섯가지를 제안한다. 실험 결과, 본 논문에서 제안한 방법 중 연결순서 coref2 가 MUC F1 81.40%로 가장 좋은 성능을 보였다. 이는 기존 한국어 대명사 상호참조해결의 규칙 기반(50.40%)보다 31.00%p, 통계 기반(62.12%) 보다 19.28%p 우수한 성능임을 나타낸다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 8,
+            "article_id": "ART002291232",
+            "title_ko": "문서 분류의 개선을 위한 단어-문자 혼합 신경망 모델",
+            "author_name": "홍대영",
+            "author_id": "CRT002059572",
+            "author_inst": "서울대학교",
+            "author2_id": [
+                "CRT000306987"
+            ],
+            "author2_name": [
+                "심규석"
+            ],
+            "author2_inst": [
+                "서울대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2017,
+            "citation": 1,
+            "category": "ML",
+            "keys": [
+                "문서 분류",
+                "딥 러닝",
+                "컨볼루션 신경망",
+                "순환 신경망",
+                "document classification",
+                "deep learning",
+                "convolutional neural network",
+                "recurrent neural network"
+            ],
+            "abstract_ko": "문서의 텍스트를 바탕으로 각 문서가 속한 분류를 찾아내는 문서 분류는 자연어 처리의 기본 분야 중 하나로 주제 분류, 감정 분류 등 다양한 분야에 이용될 수 있다. 문서를 분류하기 위한 신경망 모델은 크게 단어를 기본 단위로 다루는 단어 수준 모델과 문자를 기본 단위로 다루는 문자 수준 모델로 나누어진다. 본 논문에서는 문서를 분류하는 신경망 모델의 성능을 향상시키기 위하여 문자 수준과 단어 수준의 모델을 혼합한 신경망 모델을 제안한다. 제안하는 모델은 각 단어에 대하여 문자 수준의 신경망 모델로 인코딩한 정보와 단어들의 정보를 저장하고 있는 단어 임베딩 행렬의 정보를 결합하여 각 단어에 대한 특징 벡터를 만든다. 추출된 단어들에 대한 특징 벡터를 바탕으로, 주의(attention) 메커니즘을 이용한 순환 신경망을 단어 수준과 문장 수준에 각각 적용하는 계층적 신경망 구조를 통해 문서를 분류한다. 제안한 모델에 대하여 실생활 데이터를 바탕으로 한 실험으로 효용성을 검증한다.",
+            "Similarity_AVG": 0.96,
+            "origin_check": 0
+        },
+        {
+            "id": 9,
+            "article_id": "ART002373546",
+            "title_ko": "Bidirectional LSTM-CRF 기반의 음절 단위 한국어 품사 태깅 및 띄어쓰기 통합 모델 연구",
+            "author_name": "김선우",
+            "author_id": "CRT002172606",
+            "author_inst": "경기대학교",
+            "author2_id": [
+                "CRT000277065"
+            ],
+            "author2_name": [
+                "최성필"
+            ],
+            "author2_inst": [
+                "경기대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2018,
+            "citation": 12,
+            "category": "ML",
+            "keys": [
+                "한국어 품사 태깅",
+                "한국어 자동 띄어쓰기",
+                "자연어처리",
+                "심층학습",
+                "korean POS(part-of-speech) tagging",
+                "korean automatic spacing",
+                "NLP(natural language processing)",
+                "deep-learning"
+            ],
+            "abstract_ko": "일반적으로 한국어 품사 태깅은 단어 단위로 띄어쓰기가 완료된 문장을 입력으로 받는다. 만일 띄어쓰기가 제대로 되지 않은 문장을 처리하기 위해서는 오류를 수정하기 위한 자동 띄어쓰기 처리가 선행되어야한다. 그러나 자동 띄어쓰기 처리와 품사 태깅을 순차적으로 수행하면 각 단계에서 발생하는 오류로 인해 심각한 성능 저하 현상이 발생할 수 있다. 본 연구에서는 자동 띄어쓰기와 품사 태깅을 동시에 수행할 수 있는 통합모델을 구축하여 이러한 문제를 해결하고자 한다. 세부적으로 Bidirectional LSTM-CRF 모델을 바탕으로 음절 기반의 띄어쓰기 및 품사 태깅을 상보적으로 동시에 수행할 수 있는 통합 모델을 제안한다. 한국어 문어 품사부착 말뭉치를 이용한 실험 결과, 띄어쓰기가 완전한 문장에 대해서는 98.77%의 품사 태깅 성능을 보였으며, 띄어쓰기가 전혀 되어 있지 않은 문장 집합에 대해서는 97.92%의 형태소 단위 F1-measure 성능을 나타내었다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 10,
+            "article_id": "ART002383542",
+            "title_ko": "단어 간의 상대적 위치정보를 이용한 단어 임베딩",
+            "author_name": "황현선",
+            "author_id": "CRT002144440",
+            "author_inst": "강원대학교 컴퓨터과학과",
+            "author2_id": [
+                "CRT001419817",
+                "CRT002181767",
+                "CRT002181768"
+            ],
+            "author2_name": [
+                "이창기",
+                "장현기",
+                "강동호"
+            ],
+            "author2_inst": [
+                "강원대학교",
+                "신한은행",
+                "SK 주식회사 C&C"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2018,
+            "citation": 4,
+            "category": "ML",
+            "keys": [
+                "단어 임베딩",
+                "Word2vec",
+                "GloVe",
+                "위치정보",
+                "word embedding",
+                "Word2vec",
+                "GloVe",
+                "position information"
+            ],
+            "abstract_ko": "자연어처리에 딥 러닝을 적용하기 위해 사용되는 Word embedding은 단어를 벡터 공간상에 표현하는 것으로 차원축소 효과와 더불어 유사한 의미의 단어는 유사한 벡터 값을 갖는다는 장점이 있다.\r\n이러한 word embedding은 대용량 코퍼스를 학습해야 좋은 성능을 얻을 수 있다. 그러나 기존에 자주 사용되던 word2vec 모델은 대용량 코퍼스 학습을 위해 모델을 단순화 하여 단어의 등장 비율을 주로 학습하게 되어 단어 간의 상대적 위치정보를 이용하지 않는다는 단점이 있다. 본 논문에서는 기존의 word embedding 학습 모델을 단어 간의 상대적 위치정보를 이용하여 학습할 수 있도록 수정하였다. 실험 결과 단어 간의 상대적 위치정보를 이용하여 word embedding을 학습 하였을 경우 word-analogy의 성능이 향상되었다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 11,
+            "article_id": "ART002383538",
+            "title_ko": "생성 기반 질의응답 채팅 시스템에서의 정답 반복 문제 해결",
+            "author_name": "김시형",
+            "author_id": "CRT002181764",
+            "author_inst": "강원대학교",
+            "author2_id": [
+                "CRT000270864"
+            ],
+            "author2_name": [
+                "김학수"
+            ],
+            "author2_inst": [
+                "강원대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2018,
+            "citation": 1,
+            "category": "ML",
+            "keys": [
+                "question-answering chat system",
+                "sequence-to-sequence model",
+                "coverage mechanism",
+                "adaptive control of attention mechanism",
+                "repetition loss function",
+                "질의응답 채팅 시스템",
+                "Sequence-to-sequence모델",
+                "커버리지 방법",
+                "ACA 방법",
+                "반복 손실 함수"
+            ],
+            "abstract_ko": "질의응답 채팅 시스템은 간단한 사실적 질문을 지식베이스 검색을 통하여 응답하는 채팅 시스템이다. 최근에 많은 sequence-to-sequence 채팅 시스템은 생성 모델의 새로운 가능성을 보였다. 그러나 생성기반 채팅 시스템은 같은 단어를 반복해서 생성하는 단어 반복 문제가 존재한다. 질의응답 채팅 시스템에서는 같은 정답이 반복되어 생성되는 문제를 가지고 있다. 이러한 문제를 해결하기 위해, 본 논문에서는 디코더에서 커버리지 방법과 ACA(Adaptive control of attention) 방법을 sequence-to-sequence 모델에 반영하는 방법을 제안한다. 또한 응답에서 중복되지 않은 단어의 개수를 반영하는 반복 손실 함수를 제안한다. 제안된 방법은 정밀도, BLEU, ROUGE-1, ROUGE-2, ROUGE-L, Distinct-1 모든 지표에서 높은 성능을 보일 뿐만 아니라, 다른 반복 출력 문제 해결을 위한 모델과의 결합에서도 좋은 성능을 보였다.",
+            "Similarity_AVG": 0.93,
+            "origin_check": 0
+        },
+        {
+            "id": 12,
+            "article_id": "ART002551392",
+            "title_ko": "신조어 및 띄어쓰기 오류에 강인한 시퀀스-투-시퀀스 기반 한국어 형태소 분석기",
+            "author_name": "최병서",
+            "author_id": "CRT002369186",
+            "author_inst": "서울대학교 컴퓨터공학부",
+            "author2_id": [
+                "CRT000460577",
+                "CRT000304557"
+            ],
+            "author2_name": [
+                "이익훈",
+                "이상구"
+            ],
+            "author2_inst": [
+                "광주대학교",
+                "서울대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2020,
+            "citation": 4,
+            "category": "ML",
+            "keys": [
+                "형태소 분석",
+                "품사 태깅",
+                "시퀀스 투 시퀀스",
+                "원형 복원",
+                "인터넷 텍스트 데이터",
+                "morphological analysis",
+                "POS tagging",
+                "original form recovery",
+                "sequence-to-sequence",
+                "internet text data"
+            ],
+            "abstract_ko": "한국어 커뮤니티 등에서 수집되는 인터넷 텍스트 데이터를 형태소 분석하기 위해서는, 띄어쓰기 오류가 있는 문장에서도 정확히 형태소 분석을 해내야 하고, 신조어 등의 사전 외 어휘 입력에 대한 원형복원 성능이 충분해야 한다. 그러나 기존 한국어 형태소분석기는 원형복원에 사전 또는 규칙 기반 알고리즘을 사용하는 경우가 많다. 본 논문에서는 시퀀스-투-시퀀스 모델을 기반으로 띄어쓰기 문제와 신조어 문제를 효과적으로 처리할 수 있는 한국어 형태소 분석기 모델을 제안한다. 본 모델은 사전을 사용하지 않고, 규칙 기반 전처리를 최소화한다. 일반적으로 사용하는 음절 외에도 음절 바이그램과 자소를 입력 자질로 같이 사용하며, 공백을 제거한 데이터를 학습 데이터로 같이 사용한다. 제안 모델은 세종 말뭉치를 이용한 실험에서 사전을 사용하지 않는 기존 형태소 분석기에 비해 뛰어난 성능이 나왔다. 띄어쓰기가 없는 데이터셋 및 인터넷에서 직접 수집한 데이터셋에 대해서도 높은 성능이 나오는 것을 확인하였다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 13,
+            "article_id": "ART002744016",
+            "title_ko": "연속적인 시계열 예측을 위한 디노이징 다변량 시계열 모델링",
+            "author_name": "홍정수",
+            "author_id": "CRT002640896",
+            "author_inst": "연세대학교",
+            "author2_id": [
+                "CRT002061750",
+                "CRT002580124",
+                "CRT002640897",
+                "CRT002640898",
+                "CRT000304337"
+            ],
+            "author2_name": [
+                "박진욱",
+                "이지은",
+                "김경훈",
+                "홍승균",
+                "박상현"
+            ],
+            "author2_inst": [
+                "연세대학교",
+                "연세대학교",
+                "연세대학교",
+                "연세대학교 컴퓨터과학과",
+                "연세대학교"
+            ],
+            "journal_name": "정보과학회논문지",
+            "pub_year": 2021,
+            "citation": 0,
+            "category": "ML",
+            "keys": [
+                "multivariate time series forecasting",
+                "multi-step ahead prediction",
+                "denoising training",
+                "multiple seasonality",
+                "attention mechanism",
+                "다변량 시계열 예측",
+                "연속 예측",
+                "디노이징 훈련 기법",
+                "다중 주기성",
+                "주의 기제 기법"
+            ],
+            "abstract_ko": "시계열 예측 연구 분야는 시계열 내의 주기성을 통해 미래의 시점을 예측하는 연구이다. 산업 환경에서는 미래의 연속적인 시점 예측을 통한 의사 결정이 중요하기 때문에 시계열의 연속 예측이 필요하다. 하지만 연속 예측은 이전 시차의 예측 값에 종속적이어서 불안정성이 높기 때문에 전통적인 시계열 예측은 한 시점에 대한 통계적 예측을 한다. 이를 해결하기 위해 본 연구에서는 다변량 시계열에 대해 연속적인 시점을 예측하는 인코더-디코더 기반의 ‘DTSNet’을 제안한다. DTSNet은 안정적인 예측을 위해 위치 인코딩을 적용한 표현형을 사용하고, 새로운 디노이징 훈련법을 제안한다. 또한, 장기 의존성을 해결하고 복잡한 주기성을 모델링하기 위해 이중 주의 기제 기법을 제안하고, 변수 별 특화 모델링을 위해 멀티 헤드 신경망을 사용한다. 본 모형의 성능 향상을 검증하기 위해 베이스라인 모형들과 비교 분석하고, 구성 요소 및 디노이징 강도 실험 등의 비교 실험을 통해 제안하는 방법론을 입증한다.",
+            "Similarity_AVG": 0.95,
+            "origin_check": 0
+        },
+        {
+            "id": 14,
+            "article_id": "ART002287982",
+            "title_ko": "딥러닝 모형의 복잡도에 관한 연구",
+            "author_name": "김동하",
+            "author_id": "CRT002117883",
+            "author_inst": "서울대학교",
+            "author2_id": [
+                "CRT002117884",
+                "CRT000276514"
+            ],
+            "author2_name": [
+                "백규승",
+                "김용대"
+            ],
+            "author2_inst": [
+                "서울대학교",
+                "서울대학교"
+            ],
+            "journal_name": "한국데이터정보과학회지",
+            "pub_year": 2017,
+            "citation": 2,
+            "category": "ML",
+            "keys": [
+                "법러닝",
+                "복잡도",
+                "선형 영역",
+                "심층 신경망 함수",
+                "함수 궤적",
+                "함수 전이",
+                "Complexity",
+                "deep learning",
+                "deep neural network",
+                "linear regions",
+                "trajectory of a function",
+                "transition of a function."
+            ],
+            "abstract_ko": "딥러닝은 영상 인식, 음성 인식 등 기존의 머신 러닝 기법들로 해결이 어려웠던 분야에서 매우 우수한 성능을 보였고, 그로 인해 딥러 닝의 폭발적인 연구의 증가가 있었다. 좋은 성능을 보이는 모형 및 모수 추정 방법에 대한 연구들이 주를 이루고 있는 현 흐름 속에서 딥러닝의 이론적인 연구 또한 조심스럽게 진행되고 있다. 본 논문에서는 딥러닝의 성공을 딥러닝 함수가 복잡한 함수를 효율적으로 잘 표현할 수 있음에서 해답을 찾고, 이에 관련된 이론적인 연구들을 조사하여 분석하고자 한다.",
+            "Similarity_AVG": 0.94,
+            "origin_check": 0
+        }
+    ],
+    "links": [
+        {
+            "source": 14,
+            "target": 1,
+            "distance": 0.94
+        },
+        {
+            "source": 14,
+            "target": 7,
+            "distance": 0.0
+        },
+        {
+            "source": 14,
+            "target": 8,
+            "distance": 0.0
+        },
+        {
+            "source": 14,
+            "target": 3,
+            "distance": 0.0
+        },
+        {
+            "source": 14,
+            "target": 5,
+            "distance": 0.0
+        },
+        {
+            "source": 14,
+            "target": 13,
+            "distance": 0.0
+        },
+        {
+            "source": 14,
+            "target": 12,
+            "distance": 0.0
+        },
+        {
+            "source": 4,
+            "target": 6,
+            "distance": 0.0
+        },
+        {
+            "source": 4,
+            "target": 1,
+            "distance": 0.96
+        },
+        {
+            "source": 4,
+            "target": 0,
+            "distance": 0.0
+        },
+        {
+            "source": 4,
+            "target": 9,
+            "distance": 0.0
+        },
+        {
+            "source": 4,
+            "target": 10,
+            "distance": 0.0
+        },
+        {
+            "source": 4,
+            "target": 12,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 1,
+            "distance": 0.95
+        },
+        {
+            "source": 13,
+            "target": 7,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 8,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 3,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 5,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 11,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 12,
+            "distance": 0.0
+        },
+        {
+            "source": 13,
+            "target": 2,
+            "distance": 0.0
+        },
+        {
+            "source": 8,
+            "target": 1,
+            "distance": 0.96
+        },
+        {
+            "source": 8,
+            "target": 7,
+            "distance": 0.0
+        },
+        {
+            "source": 8,
+            "target": 2,
+            "distance": 0.0
+        },
+        {
+            "source": 8,
+            "target": 11,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 6,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 1,
+            "distance": 0.95
+        },
+        {
+            "source": 12,
+            "target": 3,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 5,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 0,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 9,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 10,
+            "distance": 0.0
+        },
+        {
+            "source": 12,
+            "target": 2,
+            "distance": 0.0
+        },
+        {
+            "source": 7,
+            "target": 1,
+            "distance": 0.95
+        },
+        {
+            "source": 7,
+            "target": 2,
+            "distance": 0.0
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "distance": 0.0
+        },
+        {
+            "source": 7,
+            "target": 5,
+            "distance": 0.0
+        },
+        {
+            "source": 9,
+            "target": 6,
+            "distance": 0.0
+        },
+        {
+            "source": 9,
+            "target": 1,
+            "distance": 0.95
+        },
+        {
+            "source": 9,
+            "target": 0,
+            "distance": 0.0
+        },
+        {
+            "source": 9,
+            "target": 10,
+            "distance": 0.0
+        },
+        {
+            "source": 5,
+            "target": 1,
+            "distance": 0.94
+        },
+        {
+            "source": 5,
+            "target": 3,
+            "distance": 0.0
+        },
+        {
+            "source": 10,
+            "target": 6,
+            "distance": 0.0
+        },
+        {
+            "source": 10,
+            "target": 1,
+            "distance": 0.95
+        },
+        {
+            "source": 10,
+            "target": 0,
+            "distance": 0.0
+        },
+        {
+            "source": 10,
+            "target": 2,
+            "distance": 0.0
+        },
+        {
+            "source": 2,
+            "target": 1,
+            "distance": 0.97
+        },
+        {
+            "source": 2,
+            "target": 11,
+            "distance": 0.0
+        },
+        {
+            "source": 0,
+            "target": 6,
+            "distance": 0.0
+        },
+        {
+            "source": 0,
+            "target": 1,
+            "distance": 0.94
+        },
+        {
+            "source": 1,
+            "target": 6,
+            "distance": 0.93
+        },
+        {
+            "source": 1,
+            "target": 11,
+            "distance": 0.93
+        },
+        {
+            "source": 1,
+            "target": 3,
+            "distance": 0.95
+        }
+    ]
+}

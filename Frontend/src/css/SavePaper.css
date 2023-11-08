@@ -1,0 +1,77 @@
+.save-container{
+  max-width: 70%;
+  margin: 0 auto;
+}
+.save-title {
+  margin: 20px 0;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  color: #588157;
+}
+
+.save-list {
+  list-style: none;
+  font-size: small;
+}
+
+.save-item {
+  border-top: 2px solid #588157;
+  /* border-bottom: 1px solid #374D9A; */
+  padding: 20px 20px ;
+  height: 185px;
+  position: relative; 
+  overflow: hidden; /* 다음 li 요소가 버튼을 가리지 못하도록 설정 */
+  margin-bottom: 7px;
+}
+
+.save-item-title {
+  color: rgb(85, 83, 83);
+  text-align: left;
+  font-weight: 500;
+  font-size: medium;
+  cursor: pointer; 
+  transition: color 0.3s ease;
+}
+
+.save-item-title:hover {
+  color:hsl(28, 100%, 50%);;
+}
+
+.save-item-abstract {
+  color: rgb(85, 83, 83);
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.save-item-author{
+  color: rgb(85, 83, 83);
+}
+
+.btn-outline-success.custom2-btn{
+  background-color:white;
+  border-radius: 45px;
+  color:  hsl(28, 100%, 50%);
+  border-color:  hsl(28, 100%, 50%);
+  position: absolute;
+  cursor: pointer;
+  /* right: 10px; 
+  top: 50%;  */
+  z-index: 1; 
+  }
+  
+.btn-outline-success.custom2-btn:hover{
+  background-color:hsl(28, 100%, 50%);
+  border-radius: 45px;
+  color: white;
+  border-color:  hsl(28, 100%, 50%);
+  position: absolute;
+  }
+
+  .item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

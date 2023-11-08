@@ -1,0 +1,199 @@
+.leftPage {
+    background-color: white;
+    border-right: 1px solid #ccc;
+    padding-top: 5px;
+    position: relative;
+    flex: 1;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    transition: transform 0.5s ease;
+    z-index: 1;
+    transform: translateX(-100%);
+}
+
+.leftPage.closed {
+    /* left-page를 왼쪽으로 이동하여 숨기지만, 다시 열 때 원래 위치로 돌아오도록 transform 초기화 필요 */
+    transform: translateX(0%);
+}
+
+.articleList {
+    font-size: small;
+    border-top: 1px solid #ccc;
+    border-radius: 0px;
+    padding: 5px 15px 5px 15px;
+    /* 가로 세로 흐림반경 색 투명도*/
+    /* box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.184);  */
+    transition: background-color 0.3s;
+}
+
+.articleList:hover{
+    /* border: 2px solid  orange */
+    background-color: rgba(163, 177, 138, 0.15);
+}
+
+.abstract {
+    font-size: small;
+}
+
+#left-page-author {
+    float: left; /* 왼쪽으로 부유하도록 지정 */
+    /* width: 90%; */
+    /* max-height: 1.3em; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: gray;
+}
+
+#left-page-year {
+    float: right; /* 오른쪽으로 부유하도록 지정 */
+    color: gray;
+}
+
+#paperbox-abs{
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 표시 줄 수 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    color: rgba(0, 0, 0, 0.822);
+}
+
+.leftButton {
+    position: absolute;
+    top: 70px;
+    left: calc(100%);
+    width: 30px;
+    height: 70px;
+    background-color: rgba(173, 175, 176, 0.507);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: background-color 0.5s ease;
+}
+
+.leftButton:hover {
+    /* 호버 시 배경색 변경 */
+    background-color: rgba(021, 115, 071, 1);
+}
+
+.highlighted {
+    /* 원하는 하이라이팅 색상 지정 */
+    background-color: yellow;
+    /* 원하는 스타일 지정 */
+    font-weight: bold;
+}
+
+.bottomButtonGroup {
+    position: absolute;
+    bottom: 15px;
+    left: calc(100%);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease;
+}
+
+#helpModal {
+    width: 360px;
+    height: 230px;
+    bottom: 100%;
+    left: 0;
+    /* 도움말 모달 위치가 버튼과 얼마나 떨어져있는지 조정하는 요소 */
+    transform: translate(0, -5%);
+    font-size: small;
+    overflow: auto;
+}
+
+/* 그래프와 노드 정보를 감싸는 컨테이너 스타일 */
+.svg-container {
+    display: flex;
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+}
+
+/* 그래프 영역 스타일 (2:1 비율) */
+.graph {
+    flex: 4;
+    /* 그래프 영역이 전체 너비의 2/3을 차지하도록 설정 */
+    display: flex;
+    /* 그래프 영역 내부에서도 flex를 사용하여 가운데 정렬 */
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    width: 100%;
+    /* 그래프 영역이 부모 요소의 100% 너비를 차지하도록 설정 */
+    height: 100%;
+    /* 그래프 영역이 부모 요소의 100% 높이를 차지하도록 설정 */
+    overflow: hidden;
+    /* 그래프 영역을 벗어나는 내용 숨김 */
+}
+
+/* 노드 정보 영역 스타일 (2:1 비율) */
+.node-info {
+    flex: 1;
+    /* 노드 정보 영역이 전체 너비의 1/3을 차지하도록 설정 */
+    padding: 20px;
+    /* 여백을 추가하거나 조절하세요 */
+    border-left: 1px solid #ccc;
+    /* 그래프 영역과 구분하기 위한 왼쪽 경계선 추가 */
+    background-color: #f5f5f5;
+    /* 노드 정보 영역 배경색 설정 */
+    overflow-y: auto;
+    /* 노드 정보가 넘칠 경우 스크롤바 추가 */
+    height: 100%;
+}
+
+#filterBar {
+    font-size: small;
+}
+
+.publishYearBar {
+    display: flex;
+    flex-direction: column;
+    /* 세로로 요소를 나열합니다. */
+    align-items: center;
+    /* 가로 중앙 정렬 */
+}
+
+.publishYearBar-item {
+    width: 100px;
+    /* 각 요소의 너비 설정 */
+    height: 20px;
+    /* 각 요소의 높이 설정 */
+    background: linear-gradient(to right, rgba(58, 90, 64, 0), rgba(58, 90, 64, 0.7));
+}
+
+.publishYearBar-text-right {
+    /* align-self: flex-end; */
+    /* 우측 정렬 */
+    margin-right: 0px;
+    /* 우측 여백 설정 */
+    /* margin-left: auto; */
+    /* 좌측 여백 설정 */
+}
+
+.svg-container {
+    position: relative;
+}
+
+.publishYearBar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

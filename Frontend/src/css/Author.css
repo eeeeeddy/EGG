@@ -1,0 +1,33 @@
+
+#body{
+    /* width: 100vh; */
+    /* height: 95vh; */
+}
+
+.nav-tabs > .nav-item > .active {
+    color: #3A5A40 !important
+}
+
+.nav-tabs > .nav-item > .nav-link {
+    color: black
+}
+.text-center{
+    top: 0;
+    left: 0;
+}
+.button-container {
+    position: absolute;
+    bottom: 0px; 
+    left: 0px; 
+    top:0px;
+}
+#helpButton2{  
+    cursor:pointer;
+    /* z-index: 9; */
+    margin-right: 10px; /* 도움말과 가운데 버튼 사이에 여백을 추가합니다. */
+
+}
+#centerButton2{
+    /* z-index: 11; */
+    cursor:pointer;
+}

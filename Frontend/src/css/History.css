@@ -1,0 +1,47 @@
+.history-container{
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.history-title {
+  margin: 20px 0;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  color: #588157;
+}
+
+.history-list {
+  list-style: none;
+  font-size: small;
+}
+
+.history-item {   
+  border-top: 2px solid #588157;
+  padding: 20px 20px ;
+}
+
+.history-item-title {
+  color: rgb(85, 83, 83);
+  text-align: left;
+  font-weight: 500;
+  font-size: medium;
+  cursor: pointer; 
+  transition: color 0.3s ease;
+}
+
+.history-item-title:hover {
+  color:hsl(28, 100%, 50%);
+}
+
+.history-item-author{
+  color: rgb(85, 83, 83);
+}
+
+.history-item-abstract {
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgb(85, 83, 83);
+}
