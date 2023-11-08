@@ -1,4 +1,4 @@
-# EGG : 논문 시각화 검색 서비스
+# EGG Backend
 
 ### 1. Stack
 
