@@ -1,0 +1,22 @@
+#egg.co.kr 파일 내용
+ upstream egg.co.kr {
+     server  host.docker.internal:3000;
+ }
+
+ server {
+     listen       80;
+     server_name  egg.co.kr;
+     access_log   off;
+
+     location / {
+         proxy_set_header X-Forwarded-Host    $host;
+         proxy_set_header X-Forwarded-Server  $host;
+         proxy_set_header X-Forwarded-For     $proxy_add_x_forwarded_for;
+
+         # 502 에러를 없애기 위한 proxy 버퍼 관련 설정입니다.
+         proxy_buffer_size        128k;
+         proxy_buffers            4 256k;
+         proxy_busy_buffers_size  256k;
+         proxy_pass               http://egg.co.kr;
+     }
+ }
