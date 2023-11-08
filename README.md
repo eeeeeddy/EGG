@@ -1,4 +1,4 @@
-# EGG Backend
+# EGG - Backend
 
 ### 1. Stack
 
