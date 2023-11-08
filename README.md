@@ -6,12 +6,10 @@
 - [API](#api)</br>
 - [Function](#function)<br/>
    + [ElasticSearch 검색엔진 연동]<br/>
-       + </br>
    + [SpringSecurity+JWT+Redis를 활용한 토큰 기반 사용자 기능](#회원-기능)<br/>
        + [개념](#개념)<br/> 
        + [처리 과정](#처리과정)<br/> 
    + [CI/CD 구성]<br/>
-      + </br>
 ---
 ## Stack
 
