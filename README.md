@@ -1,5 +1,11 @@
 # EGG : 논문 시각화 검색 서비스
 
+**Frontend : https://github.com/eeeeeddy/EGG_Frontend.git**
+**Backend : https://github.com/eeeeeddy/EGG_Backend.git**
+**Data : https://github.com/eeeeeddy/EGG_Data.git**
+**FastAPI : https://github.com/eeeeeddy/EGG_FastAPI.git**
+**Docker : https://github.com/eeeeeddy/EGG_Docker.git**
+
 ### 1. 프로젝트 소개 + 개발 기간
 
 개발 기간 : 23.07.31 ~ 23.10.23
