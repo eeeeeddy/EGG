@@ -133,7 +133,7 @@
           
       - 부모 노드와 자식 노드들의 관계가 n:m으로 다양한 관계 시각화 가능
       - 논문들이 같은 참조 논문을 기반으로 하였기에 기본적으로 높은 유사도로 형성되어 있음
-      - 이전에 Classification 한 결과물로 그래프 생성 → 생성된 그래프에서 class에 따른 **filtering을 통하여 시각화 추가 기능으로 변경**
+      - 이전에 Classification 한 결과물로 그래프 생성 → 생성된 그래프에서 class에 따른 **Filtering을 통하여 시각화 추가 기능으로 변경**
    
   **7-2. Detail**
       
@@ -178,7 +178,10 @@
       - 논문 History
           
           ![history](https://github.com/eeeeeddy/Final_Backend/assets/71869717/2a79ffaa-8985-4020-8c4a-b5c04d7ac1b2)
-          
+
+
+  **7-3. CI/CD** <br>
+      ![backendCICD drawio](https://github.com/eeeeeddy/EGG_Backend/assets/71869717/14089421-227f-42fa-a5af-1bd334b6597a)
 
 ### 8. 개선 방향
 
